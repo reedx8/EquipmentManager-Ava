@@ -1,7 +1,67 @@
+'use client'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import styles from './page.module.css'
+import AuthForm from './auth/auth-form'
+import FetchData from './Components/fetch-data'
+import supabase from './config/supabaseClient'
+
+async function fetchNeedRepairs(){
+  const res = await fetch('https://ivfblcajuujuywzdsihd.supabase.co');
+  if (!res.ok){
+    throw new Error('Failed to fetch needs repair equipment')
+  }
+  const data = await res.json();
+
+  // return res.json();
+}
 
 export default function Home() {
+  const [fetchError, setFetchError] = useState(null);
+  const [needsRepairEquip, setNeedsRepairEquip] = useState(null);
+
+  useEffect(() => {
+    const fetchNeedsRepair = async () => {
+      const { data, error } = await supabase
+        .from('Equipment')
+        .select()
+        .eq('Needs_Repair', 'TRUE');
+
+        if (error){
+          setFetchError('Couldnt fetch equipment');
+          setNeedsRepairEquip(null);
+          console.log(error)
+        }
+        if (data){
+          setNeedsRepairEquip(data);
+          setFetchError(null);
+        }
+    }
+
+    fetchNeedsRepair();
+  })
+
+  return (
+    <main className={styles.main}>
+      <div className={styles.needsRepairStn}>
+        <h1>Needs Repair</h1>
+        {fetchError && (<p>{fetchError}</p>) }
+        {needsRepairEquip && (
+          <ul>
+            {needsRepairEquip.map(equip => (
+              <li key={equip.id}>{equip.Name} -- {equip.Store_Name}</li>
+            ))}
+          </ul>
+        )}
+        {/* <FetchData /> */}
+      </div>
+      {/* <AuthForm /> */}
+    </main>
+  )
+
+  /* 
+  boilerplate code below (to-delete):
+
   return (
     <main className={styles.main}>
       <div className={styles.description}>
@@ -92,4 +152,5 @@ export default function Home() {
       </div>
     </main>
   )
+  */
 }

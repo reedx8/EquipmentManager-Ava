@@ -1,3 +1,9 @@
+.needsRepairStn {
+  width: 100%;
+}
+
+/* boilerplate css below: */
+
 .main {
   display: flex;
   flex-direction: column;
