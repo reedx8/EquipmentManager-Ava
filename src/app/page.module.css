@@ -1,17 +1,22 @@
-.needsRepairStn {
-  width: 100%;
+.main {
+  background-color: var(--grey);
+  min-height: 100vh;
 }
 
-/* boilerplate css below: */
-
-.main {
+.content {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 6rem;
-  min-height: 100vh;
+  padding: 3rem;
 }
+
+.needsRepairStn {
+  width: 100%;
+}
+
+
+/* boilerplate css below: */
 
 .description {
   display: inherit;

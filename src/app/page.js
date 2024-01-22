@@ -5,6 +5,7 @@ import styles from './page.module.css'
 import AuthForm from './auth/auth-form'
 import FetchData from './Components/fetch-data'
 import supabase from './config/supabaseClient'
+import Header from './Components/header'
 
 async function fetchNeedRepairs(){
   const res = await fetch('https://ivfblcajuujuywzdsihd.supabase.co');
@@ -42,21 +43,26 @@ export default function Home() {
   })
 
   return (
-    <main className={styles.main}>
-      <div className={styles.needsRepairStn}>
-        <h1>Needs Repair</h1>
-        {fetchError && (<p>{fetchError}</p>) }
-        {needsRepairEquip && (
-          <ul>
-            {needsRepairEquip.map(equip => (
-              <li key={equip.id}>{equip.Name} -- {equip.Store_Name}</li>
-            ))}
-          </ul>
-        )}
-        {/* <FetchData /> */}
-      </div>
-      {/* <AuthForm /> */}
-    </main>
+    <>
+      <main className={styles.main}>
+        <Header/>
+        <div className={styles.content}>
+          <div className={styles.needsRepairStn}>
+            <h1>Needs Repair</h1>
+            {fetchError && (<p>{fetchError}</p>) }
+            {needsRepairEquip && (
+              <ul>
+                {needsRepairEquip.map(equip => (
+                  <li key={equip.id}>{equip.Name} -- {equip.Store_Name}</li>
+                ))}
+              </ul>
+            )}
+            {/* <FetchData /> */}
+          </div>
+        </div>
+        {/* <AuthForm /> */}
+      </main>
+    </>
   )
 
   /* 
