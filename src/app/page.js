@@ -6,6 +6,7 @@ import AuthForm from './auth/auth-form'
 import FetchData from './Components/fetch-data'
 import supabase from './config/supabaseClient'
 import Header from './Components/header'
+import Sidebar from './Components/sidebar'
 
 async function fetchNeedRepairs(){
   const res = await fetch('https://ivfblcajuujuywzdsihd.supabase.co');
@@ -45,6 +46,9 @@ export default function Home() {
   return (
     <>
       <main className={styles.main}>
+        <div>
+          <Sidebar/>
+        </div>
         <Header/>
         <div className={styles.content}>
           <div className={styles.needsRepairStn}>
