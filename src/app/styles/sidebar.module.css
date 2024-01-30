@@ -1,10 +1,45 @@
 .main {
     position: fixed;
+
     display: flex;
     flex-direction: column;
     width: 80px;
     height: 100vh;
-    padding: 1rem;
+    /* padding: 1rem; */
     justify-content: space-between;
-    background-color: red; /* for testing */
+    align-items: center;
+    background-color: white;
+    padding-top: 0.5rem;
+
+    /* for testing: */
+    /* background-color: red; */
+}
+
+.sidebarIcon {
+    /* size only works as attribute */
+    background-color: lightgreen;
+    padding: 5px;
+    color: white;
+    border-radius: 5px;
+    margin: 1rem;
+}
+.sidebarIcon:hover {
+    background-color: white;
+    color: lightgreen;
+    border: 1px solid lightgreen;
+}
+
+.sidebarLine {
+    height: 1px;
+    border: 0;
+    padding: 0;
+    border-top: 1px solid var(--grey);
+}
+
+.firsthalfSidebar {
+
+}
+
+.secondHalfSidebar{
+
 }

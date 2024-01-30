@@ -1,7 +1,11 @@
 .main {
+    margin-left: 80px;
+
     display: flex;
     justify-content: space-between;
     font-size: 14px;
-    padding: 0.5rem;
-    background-color: blue; /* for testing */
+    padding: 1rem;
+
+    /* for testing: */
+    /* background-color: blue;  */
 }
