@@ -52,7 +52,7 @@ export default function Home() {
         </div>
         <Header/>
         <div className={styles.content}>
-          <section>
+          <section className={styles.topCardSection}>
             <HomeTopCards/>
           </section>
           <section>

@@ -3,8 +3,11 @@
 
     display: flex;
     justify-content: space-between;
-    font-size: 14px;
+    /* color: white; */
+    font-size: 15px;
+    font-weight: 500;
     padding: 1rem;
+    /* background-color: #171717; */
 
     /* for testing: */
     /* background-color: blue;  */
