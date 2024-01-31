@@ -7,6 +7,7 @@ import FetchData from './Components/fetch-data'
 import supabase from './config/supabaseClient'
 import Header from './Components/header'
 import Sidebar from './Components/sidebar'
+import HomeTopCards from './Components/hometopcards'
 
 async function fetchNeedRepairs(){
   const res = await fetch('https://ivfblcajuujuywzdsihd.supabase.co');
@@ -51,18 +52,23 @@ export default function Home() {
         </div>
         <Header/>
         <div className={styles.content}>
-          <div className={styles.needsRepairStn}>
-            <h1>Needs Repair</h1>
-            {fetchError && (<p>{fetchError}</p>) }
-            {needsRepairEquip && (
-              <ul>
-                {needsRepairEquip.map(equip => (
-                  <li key={equip.id}>{equip.Name} -- {equip.Store_Name}</li>
-                ))}
-              </ul>
-            )}
-            {/* <FetchData /> */}
-          </div>
+          <section>
+            <HomeTopCards/>
+          </section>
+          <section>
+            <div className={styles.needsRepairStn}>
+              <h1>Needs Repair</h1>
+              {fetchError && (<p>{fetchError}</p>) }
+              {needsRepairEquip && (
+                <ul>
+                  {needsRepairEquip.map(equip => (
+                    <li key={equip.id}>{equip.Name} -- {equip.Store_Name}</li>
+                  ))}
+                </ul>
+              )}
+              {/* <FetchData /> */}
+            </div>
+          </section>
         </div>
         {/* <AuthForm /> */}
       </main>

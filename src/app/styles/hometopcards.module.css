@@ -1,0 +1,43 @@
+.main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    /* align-items: stretch; */
+    /* width: 100vw; */
+}
+
+.card, .cardWithPercent {
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 5px;
+    flex-grow: 0.5;
+}
+
+.cardWithPercent {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cardNumber {
+    display: inline;
+    margin-left: 0.5rem;
+    /* color: lightblue; */
+}
+
+.cardSubtitle {
+    font-size: 14px;
+    font-weight: 200;
+}
+
+.percentBox {
+    background-color: lightblue;
+    margin: auto 0 auto 10px;
+    padding: 15px;
+    border-radius: 5px;
+}
+.percentText {
+    font-weight: 200;
+
+}
