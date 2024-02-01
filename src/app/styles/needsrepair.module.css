@@ -1,0 +1,14 @@
+.title {
+    margin-bottom: 1rem;
+}
+
+.paginationBar {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+.paginationButtons {
+    padding: 0.3rem;
+    margin: 0.1rem;
+}

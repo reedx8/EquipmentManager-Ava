@@ -1,17 +1,16 @@
-.main {
+/* 
+layout.js styles:
+*/
+.mainLayout {
+  margin-left: 80px;
   background-color: var(--grey);
   min-height: 100vh;
 }
 
-.content {
-  margin-left: 80px;
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* justify-content: space-between; */
-  /* align-items: center; */
-  /* padding: 3rem; */
-}
-.content section {
+/* 
+page.js styles:
+*/
+.pageContent > section {
   margin: 2rem;
 }
 
@@ -19,12 +18,15 @@
   /* background-color: #171717; */
 }
 
+/* Not used: */
 .needsRepairStn {
   width: 100%;
 }
 
 
-/* boilerplate css below: */
+/* 
+unused boilerplate css below:
+*/
 
 .description {
   display: inherit;

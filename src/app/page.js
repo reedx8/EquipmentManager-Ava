@@ -5,8 +5,6 @@ import styles from './page.module.css'
 import AuthForm from './auth/auth-form'
 import FetchData from './Components/fetch-data'
 import supabase from './config/supabaseClient'
-import Header from './Components/header'
-import Sidebar from './Components/sidebar'
 import HomeTopCards from './Components/hometopcards'
 import NeedsRepair from './Components/needsrepair'
 
@@ -46,34 +44,25 @@ export default function Home() {
   })
 
   return (
-    <>
-      <main className={styles.main}>
-        <div>
-          <Sidebar/>
-        </div>
-        <Header/>
-        <div className={styles.content}>
-          <section className={styles.topCardSection}>
-            <HomeTopCards/>
-          </section>
-          <section>
-            <NeedsRepair/>
-            {/* <div className={styles.needsRepairStn}>
-              <h1>Needs Repair</h1>
-              {fetchError && (<p>{fetchError}</p>) }
-              {needsRepairEquip && (
-                <ul>
-                  {needsRepairEquip.map(equip => (
-                    <li key={equip.id}>{equip.Name} -- {equip.Store_Name}</li>
-                  ))}
-                </ul>
-              )}
-            </div> */}
-          </section>
-        </div>
-        {/* <AuthForm /> */}
-      </main>
-    </>
+      <div className={styles.pageContent}>
+        <section className={styles.topCardSection}>
+          <HomeTopCards/>
+        </section>
+        <section>
+          <NeedsRepair/>
+          {/* <div className={styles.needsRepairStn}>
+            <h1>Needs Repair</h1>
+            {fetchError && (<p>{fetchError}</p>) }
+            {needsRepairEquip && (
+              <ul>
+                {needsRepairEquip.map(equip => (
+                  <li key={equip.id}>{equip.Name} -- {equip.Store_Name}</li>
+                ))}
+              </ul>
+            )}
+          </div> */}
+        </section>
+      </div>
   )
 
   /* 

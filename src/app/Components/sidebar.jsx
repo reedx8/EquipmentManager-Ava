@@ -15,12 +15,12 @@ export default function Sidebar(){
                     <div className={styles.sidebarLine}></div>
                 </div>
                 <div>
-                    <Link href='/'>
+                    <Link href='/equipment'>
                         <FiTool className={styles.sidebarIcon} size={35}/>
                     </Link>
                 </div>
                 <div>
-                    <Link href='/'>
+                    <Link href='/calendar'>
                         <HiOutlineCalendar className={styles.sidebarIcon} size={35}/>
                     </Link>
                 </div>
