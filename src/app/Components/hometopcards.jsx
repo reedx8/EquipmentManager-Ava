@@ -15,7 +15,7 @@ export default function HomeTopCards(){
             <div className={styles.cardWithPercent}>
                 <div>
                     <GoTools />
-                    <h2 className={styles.cardNumber}>0</h2>
+                    <h2 className={styles.cardNumber}>3</h2>
                     <p className={styles.cardSubtitle}>Needs Repair</p>
                 </div>
                 <div className={styles.percentBox}>
@@ -34,7 +34,7 @@ export default function HomeTopCards(){
             </div>
             <div className={styles.card}>
                 < LuCalendarClock />
-                <h2 className={styles.cardNumber}>12/12/2024</h2>
+                <h2 className={styles.cardNumber}>4/2/2024</h2>
                 <p className={styles.cardSubtitle}>Next Repair Date</p>
             </div>
         </div>

@@ -8,6 +8,7 @@ import supabase from './config/supabaseClient'
 import Header from './Components/header'
 import Sidebar from './Components/sidebar'
 import HomeTopCards from './Components/hometopcards'
+import NeedsRepair from './Components/needsrepair'
 
 async function fetchNeedRepairs(){
   const res = await fetch('https://ivfblcajuujuywzdsihd.supabase.co');
@@ -56,7 +57,8 @@ export default function Home() {
             <HomeTopCards/>
           </section>
           <section>
-            <div className={styles.needsRepairStn}>
+            <NeedsRepair/>
+            {/* <div className={styles.needsRepairStn}>
               <h1>Needs Repair</h1>
               {fetchError && (<p>{fetchError}</p>) }
               {needsRepairEquip && (
@@ -66,8 +68,7 @@ export default function Home() {
                   ))}
                 </ul>
               )}
-              {/* <FetchData /> */}
-            </div>
+            </div> */}
           </section>
         </div>
         {/* <AuthForm /> */}
