@@ -1,4 +1,5 @@
 # Equipment List
+List of equipment at AVA Roasteria. A React/Next.js project.
 
 ## To Run
 1. Clone the repo to your local machine.
