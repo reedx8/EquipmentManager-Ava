@@ -12,4 +12,4 @@
 5. Run `npm run dev` in project's parent folder, then navigate to the `localhost` link given in terminal (eg `http://localhost:3000`)
 
 ## Libraries:
-- React Table Library: https://react-table-library.com/?path=/docs/getting-started-installation--page
+- React Table Library: https://react-tables.com
