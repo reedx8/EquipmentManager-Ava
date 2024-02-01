@@ -1,5 +1,5 @@
 # Equipment List
-List of equipment at AVA Roasteria. A React/Next.js project.
+List of equipment at AVA Roasteria. A React/Next.js/CSS project.
 
 ## To Run
 1. Clone the repo to your local machine.
@@ -14,3 +14,7 @@ List of equipment at AVA Roasteria. A React/Next.js project.
 
 ## Libraries:
 - React Table Library: https://react-tables.com
+
+## Docs:
+- React: https://react.dev/reference/react
+- Next.js: https://nextjs.org/docs
