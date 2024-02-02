@@ -1,5 +1,5 @@
 # Equipment List
-List of equipment at AVA Roasteria. A React/Next.js/CSS project.
+List of equipment at AVA Roasteria. A React/Next.js/JS/CSS/Supabase project.
 
 ## To Run
 1. Clone the repo to your local machine.
