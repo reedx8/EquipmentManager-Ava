@@ -1,11 +1,27 @@
+'use client'
+import { useEffect, useState } from 'react'
 import React from "react";
 import styles from '../styles/needsrepair.module.css'
 import { CompactTable } from '@table-library/react-table-library/compact';
+import {
+    Table,
+    Header,
+    HeaderRow,
+    Body,
+    Row,
+    HeaderCell,
+    Cell,
+} from '@table-library/react-table-library/table';
 import { useTheme } from "@table-library/react-table-library/theme";
 import { getTheme } from "@table-library/react-table-library/baseline";
 import { usePagination } from "@table-library/react-table-library/pagination";
-
+import supabase from '../config/supabaseClient'
 const theme = useTheme(getTheme());
+const key = 'Composed Table';
+
+/* 
+mock data (nodes[] and columns[])
+*/
 const nodes = [
     {
         id: '0',
@@ -60,6 +76,7 @@ const nodes = [
     { label: 'Reason', renderCell: (item) => item.reason },
 ];
 
+
 // Delete when done with testing:
 function onPaginationChange(action, state) {
     console.log(action, state);
@@ -67,14 +84,36 @@ function onPaginationChange(action, state) {
 
 
 export default function NeedsRepair(){
+    const [fetchError, setFetchError] = useState(null);
+    const [items, setItems] = useState(null);
     const data = { nodes };
-    const pagination = usePagination(data, {
+    const pagination = usePagination(items, {
         state: {
           page: 0,
           size: 3,
         },
         onChange: onPaginationChange,
-      });
+    });
+
+    useEffect(() => {
+        const fetchItems = async () => {
+            const {data, error} = await supabase
+                .from('Equipment')
+                .select('id, Next_Repair_Date, Store_Name, Name, Reason')
+                .eq('Needs_Repair', 'TRUE');
+            
+            if (error) {
+                setFetchError('ERROR: Couldnt fetch needs repair items')
+                setItems(null);
+                console.log("Fetch Error: ", fetchError);
+            }
+            if (data) {
+                setItems(data)
+                setFetchError(null);
+            }
+        }
+        fetchItems();
+    }, [items])
 
     return (
         <div className={styles.main}>
@@ -98,6 +137,37 @@ export default function NeedsRepair(){
                     ))}
                 </div>
             </div>
+            {fetchError && (<p>{fetchError}</p>) }
+            {items && (
+                <Table data={data} theme={theme}>
+                    {(tableList) => (
+                        <>
+                        <Header>
+                            <HeaderRow>
+                                <HeaderCell>Store Name</HeaderCell>
+                                <HeaderCell>Repair Date</HeaderCell>
+                                <HeaderCell>Name</HeaderCell>
+                                <HeaderCell>Reason</HeaderCell>
+                            </HeaderRow>
+                        </Header>
+                            <Body>
+                                {items.map((item) => (
+                                    <Row key={item.id} item={item}>
+                                        <Cell>{item.Store_Name}</Cell>
+                                        {/* <Cell>{"1/1/2020"}</Cell> */}
+                                        {/* <Cell>{item.Next_Repair_Date}</Cell> */}
+                                        <Cell>
+                                            {new Date(item.Next_Repair_Date).toLocaleDateString('en-US', {timezone: 'PST'})}
+                                        </Cell>
+                                        <Cell>{item.Name}</Cell>
+                                        <Cell>{item.Reason}</Cell>
+                                    </Row>
+                                ))}
+                            </Body>
+                        </>
+                    )}
+                </Table>
+            )}
         </div>
     )
 }
