@@ -1,8 +1,3 @@
-/*
-TODO:
-1. implement with useCallBack for table and pagination
-*/
-
 'use client';
 import { useEffect, useState } from 'react';
 import React from 'react';
