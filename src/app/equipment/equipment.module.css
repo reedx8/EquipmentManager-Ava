@@ -2,12 +2,23 @@
 Do not alter or delete:
 */
 .pageContent > section {
-    margin: 2rem; 
+    margin: 2rem;
 }
 
 /*
 Enter in your css below:
 */
+
+.tableBar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 0.5rem;
+}
+
+.tableBarChild {
+    margin-left: 0.5rem;
+    padding: 0.3rem;
+}
 
 .title {
     margin-bottom: 1rem;

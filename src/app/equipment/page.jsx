@@ -18,9 +18,20 @@ import supabase from '../config/supabaseClient';
 const theme = useTheme(getTheme());
 
 export default function Equipment() {
+    const [search, setSearch] = useState('');
     const [nodes, setNodes] = useState(null); // react-table-library requires data to be in a "nodes" object
     const [fetchError, setFetchError] = useState(null);
+    const [location, setLocation] = useState('');
     const tableData = { nodes }; // React-table-library requires/looks for a "nodes" array in the object passed into <Table> component
+
+    // For testing using search keyword to filter nodes returned in table. Refactor:
+    let tableData2 = { nodes };
+    if (search !== '') {
+        tableData2.nodes = nodes.filter((item) =>
+            item.Name.toLowerCase().includes(search.toLowerCase())
+        );
+    }
+
     const pagination = usePagination(tableData, {
         state: {
             page: 0,
@@ -38,6 +49,14 @@ export default function Equipment() {
     // Delete when done with testing:
     function onPaginationChange(action, state) {
         console.log(action, state);
+    }
+
+    function handleSearch(event) {
+        setSearch(event.target.value);
+    }
+    function handleLocationSelect(event) {
+        setLocation(event.target.value);
+        console.log(event.target.value);
     }
 
     useEffect(() => {
@@ -67,8 +86,43 @@ export default function Equipment() {
                 {fetchError && <p>{fetchError}</p>}
                 {nodes && (
                     <>
+                        <div className={styles.tableBar}>
+                            <label htmlFor='locations'></label>
+                            <select
+                                name='locations'
+                                id='locations'
+                                onChange={handleLocationSelect}
+                                className={styles.tableBarChild}
+                            >
+                                <option value='placeholder'>
+                                    Select location...
+                                </option>
+                                <optgroup label='Stores'>
+                                    <option value='hall'>Hall</option>
+                                    <option value='barrows'>Barrows</option>
+                                    <option value='kruse'>Kruse</option>
+                                    <option value='orenco'>Orenco</option>
+                                </optgroup>
+                                <optgroup label='Other locations'>
+                                    <option value='bakery'>Bakery</option>
+                                    <option value='office'>Office</option>
+                                </optgroup>
+                            </select>
+
+                            <label htmlFor='search'>
+                                {/* Search by name:{' '} */}
+                                <input
+                                    id={styles.searchField}
+                                    type='text'
+                                    value={search}
+                                    onChange={handleSearch}
+                                    placeholder='Search by name'
+                                    className={styles.tableBarChild}
+                                />
+                            </label>
+                        </div>
                         <Table
-                            data={tableData}
+                            data={tableData2}
                             theme={theme}
                             pagination={pagination}
                         >
@@ -101,7 +155,7 @@ export default function Equipment() {
                             <div>
                                 Page:{' '}
                                 {pagination.state
-                                    .getPages(tableData.nodes)
+                                    .getPages(tableData2.nodes)
                                     .map((_, index) => (
                                         <button
                                             className={styles.paginationButtons}
