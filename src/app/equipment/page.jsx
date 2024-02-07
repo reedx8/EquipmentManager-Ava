@@ -72,9 +72,7 @@ export default function Equipment() {
                             theme={theme}
                             pagination={pagination}
                         >
-                            {(
-                                allItems //allItems is just a proxy for tableData
-                            ) => (
+                            {(allItems) => (
                                 <>
                                     <Header>
                                         <HeaderRow>
