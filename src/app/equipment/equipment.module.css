@@ -1,6 +1,25 @@
-/* Do not alter or delete: */
+/* 
+Do not alter or delete:
+*/
 .pageContent > section {
     margin: 2rem; 
 }
 
-/* Enter in your css below: */
+/*
+Enter in your css below:
+*/
+
+.title {
+    margin-bottom: 1rem;
+}
+
+.paginationBar {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+.paginationButtons {
+    padding: 0.3rem;
+    margin: 0.1rem;
+}
