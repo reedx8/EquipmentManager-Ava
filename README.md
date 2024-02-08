@@ -27,7 +27,7 @@ The following are the tools and resources already installed and in-use in the pr
 Use the "Prettier" code formatter before submitting your code to keep consistency and code quality across contributions. Default settings should do, but ensure the following settings are set:
 
 -   Bracket spacing: enabled
--   JSX single quotes enabled
+-   JSX single quotes: enabled
 -   Print width: 80
 -   Semi: enabled
 -   Tab width: 4
