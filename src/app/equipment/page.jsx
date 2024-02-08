@@ -31,6 +31,11 @@ export default function Equipment() {
             item.Name.toLowerCase().includes(search.toLowerCase())
         );
     }
+    if (location !== '') {
+        tableData2.nodes = nodes.filter((item) =>
+            item.Store_Name.toLowerCase().includes(location.toLowerCase())
+        );
+    }
 
     const pagination = usePagination(tableData, {
         state: {
@@ -54,9 +59,16 @@ export default function Equipment() {
     function handleSearch(event) {
         setSearch(event.target.value);
     }
+
     function handleLocationSelect(event) {
         setLocation(event.target.value);
         console.log(event.target.value);
+    }
+
+    function handleReset() {
+        setLocation('');
+        setSearch('');
+        // console.log(location);
     }
 
     useEffect(() => {
@@ -87,27 +99,41 @@ export default function Equipment() {
                 {nodes && (
                     <>
                         <div className={styles.tableBar}>
-                            <label htmlFor='locations'></label>
-                            <select
-                                name='locations'
-                                id='locations'
-                                onChange={handleLocationSelect}
-                                className={styles.tableBarChild}
-                            >
-                                <option value='placeholder'>
-                                    Select location...
-                                </option>
-                                <optgroup label='Stores'>
-                                    <option value='hall'>Hall</option>
-                                    <option value='barrows'>Barrows</option>
-                                    <option value='kruse'>Kruse</option>
-                                    <option value='orenco'>Orenco</option>
-                                </optgroup>
-                                <optgroup label='Other locations'>
-                                    <option value='bakery'>Bakery</option>
-                                    <option value='office'>Office</option>
-                                </optgroup>
-                            </select>
+                            <form>
+                                <input
+                                    type='reset'
+                                    value='Clear selection'
+                                    className={styles.tableBarChild}
+                                    onClick={handleReset}
+                                />
+                                <label htmlFor='locations'></label>
+                                <select
+                                    name='locations'
+                                    id='locations'
+                                    onChange={handleLocationSelect}
+                                    className={styles.tableBarChild}
+                                    defaultValue='default'
+                                >
+                                    <option
+                                        value='default'
+                                        // defaultValue='default'
+                                        disabled
+                                        // hidden
+                                    >
+                                        Select location...
+                                    </option>
+                                    <optgroup label='Stores'>
+                                        <option value='hall'>Hall</option>
+                                        <option value='barrows'>Barrows</option>
+                                        <option value='kruse'>Kruse</option>
+                                        <option value='orenco'>Orenco</option>
+                                    </optgroup>
+                                    <optgroup label='Other locations'>
+                                        <option value='bakery'>Bakery</option>
+                                        <option value='office'>Office</option>
+                                    </optgroup>
+                                </select>
+                            </form>
 
                             <label htmlFor='search'>
                                 {/* Search by name:{' '} */}
