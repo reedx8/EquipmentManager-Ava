@@ -78,7 +78,7 @@ export default function Equipment() {
                 .select('id, Name, Store_Name, Total_Cost, Provider_Name');
 
             if (error) {
-                setItems(null);
+                setNodes(null);
                 setFetchError('ERROR: Couldnt fetch all equipment');
                 console.log(error);
             }
