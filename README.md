@@ -26,3 +26,4 @@ The following are the tools and resources already installed and ready to use in 
 
 -   React: https://react.dev/reference/react
 -   Next.js: https://nextjs.org/docs
+-   Supabase: https://supabase.com/docs
