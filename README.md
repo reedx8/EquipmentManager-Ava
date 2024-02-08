@@ -16,11 +16,22 @@ List of equipment at AVA Roasteria. A React/Next.js/JS/CSS/Supabase project.
 
 ## Tooling / Resources:
 
-The following are the tools and resources already installed and ready to use in the project:
+The following are the tools and resources already installed and in-use in the project. Ensure to use to keep consistency across contributions:
 
 1. Routing: Next.js App Router (https://nextjs.org/docs/app/building-your-application/routing#the-app-router)
 2. Icons: react-icons (https://react-icons.github.io/react-icons/)
 3. Tables: react-table-library (https://react-tables.com)
+
+## Styling:
+
+Use the "Prettier" code formatter before submitting your code to keep consistency and code quality across contributions. Default settings should do, but ensure the following settings are set:
+
+-   Bracket spacing: enabled
+-   JSX single quotes enabled
+-   Print width: 80
+-   Semi: enabled
+-   Tab width: 4
+-   Trailing comma: es5
 
 ## Docs:
 
