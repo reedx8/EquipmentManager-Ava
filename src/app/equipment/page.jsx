@@ -62,7 +62,7 @@ export default function Equipment() {
 
     function handleLocationSelect(event) {
         setLocation(event.target.value);
-        console.log(event.target.value);
+        // console.log(event.target.value);
     }
 
     function handleReset() {
