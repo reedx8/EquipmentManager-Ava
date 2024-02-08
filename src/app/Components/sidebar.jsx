@@ -1,33 +1,47 @@
-import styles from '../styles/sidebar.module.css'
-import Link from 'next/link'
-import Image from 'next/image'
-import { FiHome, FiTool } from "react-icons/fi";
-import { HiOutlineHome, HiOutlineCalendar } from "react-icons/hi";
+import styles from '../styles/sidebar.module.css';
+import Link from 'next/link';
+import Image from 'next/image';
+import { FiHome, FiTool } from 'react-icons/fi';
+import { HiOutlineHome, HiOutlineCalendar } from 'react-icons/hi';
+import { RiSettings3Fill } from 'react-icons/ri';
 
-export default function Sidebar(){
+export default function Sidebar() {
     return (
         <div className={styles.main}>
-            <div className={styles.firstHalfSidebar}>
+            <div className={styles.upperSidebar}>
                 <div>
                     <Link href='/'>
-                        <HiOutlineHome className={styles.sidebarIcon} size={35}/>
+                        <HiOutlineHome
+                            className={styles.sidebarIcon}
+                            size={35}
+                        />
                     </Link>
                     <div className={styles.sidebarLine}></div>
                 </div>
                 <div>
                     <Link href='/equipment'>
-                        <FiTool className={styles.sidebarIcon} size={35}/>
+                        <FiTool className={styles.sidebarIcon} size={35} />
                     </Link>
                 </div>
                 <div>
                     <Link href='/calendar'>
-                        <HiOutlineCalendar className={styles.sidebarIcon} size={35}/>
+                        <HiOutlineCalendar
+                            className={styles.sidebarIcon}
+                            size={35}
+                        />
                     </Link>
                 </div>
             </div>
-            <div className={styles.secondHalfSiderbar}>
-
+            <div className={styles.lowerSidebar}>
+                <div>
+                    <Link href='/settings'>
+                        <RiSettings3Fill
+                            className={styles.lowerBtns}
+                            size={35}
+                        />
+                    </Link>
+                </div>
             </div>
         </div>
-    )
+    );
 }

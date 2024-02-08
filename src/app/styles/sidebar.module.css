@@ -30,6 +30,16 @@
     border: 1px solid lightgreen;
 }
 
+.lowerBtns {
+    /* color: var(--grey); */
+    color: lightgrey;
+    margin: 1rem;
+}
+
+.lowerBtns:hover {
+    color: grey;
+}
+
 .sidebarLine {
     height: 1px;
     border: 0;
@@ -37,10 +47,8 @@
     border-top: 1px solid var(--grey);
 }
 
-.firsthalfSidebar {
-
+.upperSidebar {
 }
 
-.secondHalfSidebar{
-
+.lowerSidebar {
 }
