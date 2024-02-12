@@ -16,7 +16,7 @@ List of equipment at AVA Roasteria. A React/Next.js/JS/CSS/Supabase project.
 
 ## Tooling / Resources:
 
-The following are the tools and resources already installed and in-use in the project. Ensure to use to keep consistency across contributions:
+The following are the tools and resources already installed and in-use in the project. Ensure to use to keep consistency across contributions, as well as keeping project size small:
 
 1. Routing: Next.js App Router (https://nextjs.org/docs/app/building-your-application/routing#the-app-router)
 2. Icons: react-icons (https://react-icons.github.io/react-icons/)
