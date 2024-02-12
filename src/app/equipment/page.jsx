@@ -18,13 +18,15 @@ import supabase from '../config/supabaseClient';
 const theme = useTheme(getTheme());
 
 export default function Equipment() {
-    const [search, setSearch] = useState('');
-    const [nodes, setNodes] = useState(null); // react-table-library requires data to be in a "nodes" object
-    const [fetchError, setFetchError] = useState(null);
-    const [location, setLocation] = useState('');
-    const tableData = { nodes }; // React-table-library requires/looks for a "nodes" array in the object passed into <Table> component
+    const [data, setData] = useState(null); // Initial data from backend
+    const [fetchError, setFetchError] = useState(null); // fetch error from supabase
+    const [filtered, setFiltered] = useState(null); // tables data after search and location input
+    const [location, setLocation] = useState(''); // store name, ie location, from drop down menu
+    const [search, setSearch] = useState(''); // search field input
+    // const tableData = { nodes }; // React-table-library requires/looks for a "nodes" array in the object passed into <Table> component
 
-    // For testing using search keyword to filter nodes returned in table. Refactor:
+    // For testing using search keyword to filter data returned in table. Refactor:
+    /*
     let tableData2 = { nodes };
     if (search !== '') {
         tableData2.nodes = nodes.filter((item) =>
@@ -36,20 +38,15 @@ export default function Equipment() {
             item.Store_Name.toLowerCase().includes(location.toLowerCase())
         );
     }
+    */
 
-    const pagination = usePagination(tableData, {
+    const pagination = usePagination(data, {
         state: {
             page: 0,
             size: 5,
         },
         onChange: onPaginationChange,
     });
-
-    /*
-    const doGet = React.useCallback(async (params) => {
-        set
-    })
-    */
 
     // Delete when done with testing:
     function onPaginationChange(action, state) {
@@ -71,6 +68,7 @@ export default function Equipment() {
         // console.log(location);
     }
 
+    // fetch all equipment from backend on first mount only
     useEffect(() => {
         async function fetchAllEquipment() {
             const { data, error } = await supabase
@@ -78,25 +76,41 @@ export default function Equipment() {
                 .select('id, Name, Store_Name, Total_Cost, Provider_Name');
 
             if (error) {
-                setNodes(null);
+                setData(null);
+                setFiltered(null);
                 setFetchError('ERROR: Couldnt fetch all equipment');
                 console.log(error);
             }
             if (data) {
-                setNodes(data);
-                // console.log(data);
+                setData({ nodes: data }); // data needs to be in a nodes prop for react-table-library
+                setFiltered({ nodes: data });
+                // console.log(data.nodes);
                 setFetchError(null);
             }
         }
         fetchAllEquipment();
-    }, [nodes]);
+    }, []);
+
+    // Update table data with location and/or search field input
+    // only when search or location state is changed
+    useEffect(() => {
+        if (data !== null) {
+            let filteredData = data.nodes.filter((item) =>
+                item.Name.toLowerCase().includes(search.toLowerCase())
+            );
+            filteredData = filteredData.filter((item) =>
+                item.Store_Name.toLowerCase().includes(location.toLowerCase())
+            );
+            setFiltered({ nodes: filteredData });
+        }
+    }, [search, location]);
 
     return (
         <div className={styles.pageContent}>
             <section>
                 <h1 className={styles.title}>Equipment</h1>
                 {fetchError && <p>{fetchError}</p>}
-                {nodes && (
+                {data && (
                     <>
                         <div className={styles.tableBar}>
                             <form>
@@ -148,7 +162,7 @@ export default function Equipment() {
                             </label>
                         </div>
                         <Table
-                            data={tableData2}
+                            data={filtered}
                             theme={theme}
                             pagination={pagination}
                         >
@@ -181,7 +195,7 @@ export default function Equipment() {
                             <div>
                                 Page:{' '}
                                 {pagination.state
-                                    .getPages(tableData2.nodes)
+                                    .getPages(filtered.nodes)
                                     .map((_, index) => (
                                         <button
                                             className={styles.paginationButtons}
