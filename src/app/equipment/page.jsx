@@ -14,6 +14,7 @@ import {
 import { useTheme } from '@table-library/react-table-library/theme';
 import { getTheme } from '@table-library/react-table-library/baseline';
 import { usePagination } from '@table-library/react-table-library/pagination';
+import { MdDelete, MdEdit, MdAddCircle } from 'react-icons/md';
 import supabase from '../config/supabaseClient';
 const theme = useTheme(getTheme());
 
@@ -67,6 +68,9 @@ export default function Equipment() {
         setSearch('');
         // console.log(location);
     }
+    function handleAddEquipment() {
+        console.log('Add Equipment button clicked');
+    }
 
     // fetch all equipment from backend on first mount only
     useEffect(() => {
@@ -108,7 +112,17 @@ export default function Equipment() {
     return (
         <div className={styles.pageContent}>
             <section>
-                <h1 className={styles.title}>Equipment</h1>
+                <div className={styles.headerRow}>
+                    <h1 className={styles.title}>All Equipment</h1>
+                    <button
+                        className={styles.addEquipBtn}
+                        type='button'
+                        onClick={handleAddEquipment}
+                    >
+                        <MdAddCircle size={20} />
+                        Add Equipment
+                    </button>
+                </div>
                 {fetchError && <p>{fetchError}</p>}
                 {data && (
                     <>
@@ -174,6 +188,7 @@ export default function Equipment() {
                                             <HeaderCell>Location</HeaderCell>
                                             <HeaderCell>Total Cost</HeaderCell>
                                             <HeaderCell>Provider</HeaderCell>
+                                            <HeaderCell></HeaderCell>
                                         </HeaderRow>
                                     </Header>
                                     <Body>
@@ -184,6 +199,24 @@ export default function Equipment() {
                                                 <Cell>${item.Total_Cost}</Cell>
                                                 <Cell>
                                                     {item.Provider_Name}
+                                                </Cell>
+                                                <Cell>
+                                                    <div
+                                                        className={
+                                                            styles.editDeleteColumn
+                                                        }
+                                                    >
+                                                        <MdEdit
+                                                            className={
+                                                                styles.editBtn
+                                                            }
+                                                        />
+                                                        <MdDelete
+                                                            className={
+                                                                styles.deleteBtn
+                                                            }
+                                                        />
+                                                    </div>
                                                 </Cell>
                                             </Row>
                                         ))}

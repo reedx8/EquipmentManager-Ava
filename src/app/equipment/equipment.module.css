@@ -9,6 +9,12 @@ Do not alter or delete:
 Enter in your css below:
 */
 
+.headerRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
 .tableBar {
     display: flex;
     justify-content: flex-end;
@@ -33,4 +39,35 @@ Enter in your css below:
 .paginationButtons {
     padding: 0.3rem;
     margin: 0.1rem;
+}
+
+.editDeleteColumn {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.addEquipBtn {
+    background-color: lightblue;
+    /* background: none; */
+    padding: 0.4rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 8.5rem;
+    /* font: inherit; */
+}
+.addEquipBtn:hover {
+    border: 1px solid black;
+    background-color: lightgray;
+}
+
+.editBtn {
+    color: lightgray;
+}
+
+.deleteBtn {
+    color: lightcoral;
 }
