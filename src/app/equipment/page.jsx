@@ -15,8 +15,9 @@ import { useTheme } from '@table-library/react-table-library/theme';
 import { getTheme } from '@table-library/react-table-library/baseline';
 import { usePagination } from '@table-library/react-table-library/pagination';
 import { MdDelete, MdEdit, MdAddCircle } from 'react-icons/md';
+import { IoIosSwap, IoIosAddCircleOutline } from "react-icons/io";
 import supabase from '../config/supabaseClient';
-const theme = useTheme(getTheme());
+// const theme = useTheme(getTheme());
 
 export default function Equipment() {
     const [data, setData] = useState(null); // Initial data from backend
@@ -24,6 +25,7 @@ export default function Equipment() {
     const [filtered, setFiltered] = useState(null); // tables data after search and location input
     const [location, setLocation] = useState(''); // store name, ie location, from drop down menu
     const [search, setSearch] = useState(''); // search field input
+    const theme = useTheme(getTheme());
     // const tableData = { nodes }; // React-table-library requires/looks for a "nodes" array in the object passed into <Table> component
 
     // For testing using search keyword to filter data returned in table. Refactor:
@@ -111,17 +113,65 @@ export default function Equipment() {
 
     return (
         <div className={styles.pageContent}>
+            <section className={styles.topInfo}>
+                <div className={styles.infoTextCard}>
+                    <p>31 Ava Roasteria</p>
+                    <p>12 Revel</p>
+                    <p>4 DoorDash</p>
+                    <p>4 Grubhub</p>
+                    <p>4 Uber Eats</p>
+                </div>
+                <div className={styles.infoTextCard}>
+                    <p>20 Hall</p>
+                    <p>15 Barrows</p>
+                    <p>17 Kruse</p>
+                    <p>12 Orenco</p>
+                    <p>10 Bakery</p>
+                    <p>6 Office</p>
+                </div>
+                <div className={styles.card}>
+                    <div className={styles.cardTitle}>
+                        <h3>Most Repairs</h3>
+                    </div>
+                    <div className={styles.cardInfo}>
+                        <p className={styles.cardNumber}>4</p>
+                        <p className={styles.cardItem}>Espresso Machine (Hall)</p>
+                    </div>
+                </div>
+                <div className={styles.card}>
+                    <div className={styles.cardTitle}>
+                        <h3>Highest Cost</h3>
+                    </div>
+                    <div className={styles.cardInfo}>
+                        <p className={styles.cardNumber}>$282</p>
+                        <p className={styles.cardItem}>Refrigerator (Barrows)</p>
+                    </div>
+                </div>
+            </section>
             <section>
                 <div className={styles.headerRow}>
-                    <h1 className={styles.title}>All Equipment</h1>
-                    <button
-                        className={styles.addEquipBtn}
-                        type='button'
-                        onClick={handleAddEquipment}
-                    >
-                        <MdAddCircle size={20} />
-                        Add Equipment
-                    </button>
+                    <div>
+                        <h1 className={styles.title}>All Equipment</h1>
+                    </div>
+                    <div className={styles.btnSection}>
+                        <button
+                            className={styles.swapBtn}
+                            type='button'
+                            // onClick={handleAddEquipment}
+                        >
+                            <IoIosSwap size={20} />
+                            Swap 
+                        </button>
+                        <button
+                            className={styles.addEquipBtn}
+                            type='button'
+                            onClick={handleAddEquipment}
+                        >
+                            {/* <MdAddCircle size={20} /> */}
+                            <IoIosAddCircleOutline size={20} />
+                            Add Equipment
+                        </button>
+                    </div>
                 </div>
                 {fetchError && <p>{fetchError}</p>}
                 {data && (

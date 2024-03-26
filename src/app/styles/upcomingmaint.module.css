@@ -59,7 +59,7 @@
     /* align-self: flex-end; */
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: flex-end;
     margin: 0.5rem;
     /* gap: 0.5rem; */
 }

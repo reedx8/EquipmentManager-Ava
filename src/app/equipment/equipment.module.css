@@ -9,6 +9,44 @@ Do not alter or delete:
 Enter in your css below:
 */
 
+.topInfo {
+    display: flex;
+    justify-content: space-between;
+    /* gap: 1rem; */
+}
+
+.infoTextCard {
+    font-size: 0.6rem;
+}
+.cardNumber {
+    font-size: 1.7rem;
+}
+.cardItem {
+    font-size: 0.8rem;
+}
+
+.card {
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    /* margin: 5px; */
+    /* flex-grow: 0.5; */
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.cardTitle {
+    text-align: center;
+}
+
+.cardInfo {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.8rem;
+    align-items: center;
+}
+
 .headerRow {
     display: flex;
     justify-content: space-between;
@@ -44,6 +82,24 @@ Enter in your css below:
 .editDeleteColumn {
     display: flex;
     justify-content: space-evenly;
+}
+
+.btnSection {
+    display: flex;
+    gap: 0.5rem;
+    /* flex-direction: row; */
+}
+
+.swapBtn {
+    background-color: orange;
+    padding: 0.4rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 8.5rem;
 }
 
 .addEquipBtn {
