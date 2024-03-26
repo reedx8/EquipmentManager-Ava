@@ -7,12 +7,16 @@
     /* width: 100vw; */
 }
 
-.card, .cardWithPercent {
+.card,
+.cardWithPercent {
     background-color: white;
     padding: 15px;
     border-radius: 5px;
     margin: 5px;
     flex-grow: 0.5;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .cardWithPercent {
@@ -39,5 +43,4 @@
 }
 .percentText {
     font-weight: 200;
-
 }

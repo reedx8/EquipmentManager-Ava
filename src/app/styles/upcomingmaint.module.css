@@ -1,0 +1,100 @@
+.heading {
+    margin-bottom: 0.5rem;
+}
+
+.dateCard {
+    display: grid;
+    grid-template-columns: 30% 1fr;
+    background-color: white;
+    width: 375px;
+    height: 200px;
+
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.dateCardSide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 3px solid var(--grey);
+    margin-right: 0.5rem;
+    position: relative; /* This is needed for the circle to be positioned correctly relative to its card */
+}
+
+.circle {
+    width: 40px; /* Your desired circle size */
+    height: 40px; /* Your desired circle size */
+    border-radius: 50%; /* This makes it round */
+    background-color: var(
+        --grey
+    ); /* The circle color, or use an image/icon as needed */
+    position: absolute;
+    top: 15%;
+    left: 100%; /* Adjust this value to align with the grid's column separation */
+    transform: translate(
+        -50%,
+        -50%
+    ); /* This centers the circle relative to the line */
+}
+
+.dateCardInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.dateCardInfo > h1 {
+    align-self: flex-end;
+    margin: 0.5rem;
+}
+
+.dateCardInfo > p {
+    /* margin: 0.5rem; */
+    font-size: 0.8rem;
+}
+
+.dateCardContact {
+    /* align-self: flex-end; */
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    margin: 0.5rem;
+    /* gap: 0.5rem; */
+}
+.phone {
+    display: flex;
+    flex-direction: row;
+}
+
+.phone > span {
+    font-size: 0.8rem;
+    align-self: center;
+}
+
+.day {
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+    /* margin: 0; */
+    /* padding: 0; */
+}
+
+.daySupertext {
+    font-size: 1rem;
+    vertical-align: top;
+}
+
+.month {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    /* margin: 0; */
+    /* padding: 0; */
+}
+.icon {
+    margin-left: 1rem;
+}

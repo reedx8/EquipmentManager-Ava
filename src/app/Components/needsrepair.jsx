@@ -66,6 +66,7 @@ export default function NeedsRepair() {
                         data={tableData}
                         theme={theme}
                         pagination={pagination}
+                        className={styles.table}
                     >
                         {(allItems) => (
                             <>
