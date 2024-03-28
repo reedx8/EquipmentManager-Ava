@@ -15,8 +15,10 @@ import { useTheme } from '@table-library/react-table-library/theme';
 import { getTheme } from '@table-library/react-table-library/baseline';
 import { usePagination } from '@table-library/react-table-library/pagination';
 import { MdDelete, MdEdit, MdAddCircle } from 'react-icons/md';
-import { IoIosSwap, IoIosAddCircleOutline } from "react-icons/io";
+import { IoIosSwap, IoIosAddCircleOutline } from 'react-icons/io';
 import supabase from '../config/supabaseClient';
+import AddEquipmentModal from '../Components/addequipmentmodal';
+import SwapModal from '../Components/swapmodal';
 // const theme = useTheme(getTheme());
 
 export default function Equipment() {
@@ -26,22 +28,8 @@ export default function Equipment() {
     const [location, setLocation] = useState(''); // store name, ie location, from drop down menu
     const [search, setSearch] = useState(''); // search field input
     const theme = useTheme(getTheme());
-    // const tableData = { nodes }; // React-table-library requires/looks for a "nodes" array in the object passed into <Table> component
-
-    // For testing using search keyword to filter data returned in table. Refactor:
-    /*
-    let tableData2 = { nodes };
-    if (search !== '') {
-        tableData2.nodes = nodes.filter((item) =>
-            item.Name.toLowerCase().includes(search.toLowerCase())
-        );
-    }
-    if (location !== '') {
-        tableData2.nodes = nodes.filter((item) =>
-            item.Store_Name.toLowerCase().includes(location.toLowerCase())
-        );
-    }
-    */
+    const [showAddEquipmentModal, setShowAddEquipmentModal] = useState(false);
+    const [showSwapModal, setShowSwapModal] = useState(false);
 
     const pagination = usePagination(data, {
         state: {
@@ -70,8 +58,22 @@ export default function Equipment() {
         setSearch('');
         // console.log(location);
     }
+
     function handleAddEquipment() {
-        console.log('Add Equipment button clicked');
+        // console.log('Add Equipment button clicked');
+        setShowAddEquipmentModal(true);
+    }
+    function handleSwapEquipment() {
+        // console.log('Swap Equipment button clicked');
+        setShowSwapModal(true);
+    }
+
+    function handleCloseModal() {
+        setShowAddEquipmentModal(false);
+    }
+
+    function handleSwapModalClose() {
+        setShowSwapModal(false);
     }
 
     // fetch all equipment from backend on first mount only
@@ -135,7 +137,9 @@ export default function Equipment() {
                     </div>
                     <div className={styles.cardInfo}>
                         <p className={styles.cardNumber}>4</p>
-                        <p className={styles.cardItem}>Espresso Machine (Hall)</p>
+                        <p className={styles.cardItem}>
+                            Espresso Machine (Hall)
+                        </p>
                     </div>
                 </div>
                 <div className={styles.card}>
@@ -144,7 +148,9 @@ export default function Equipment() {
                     </div>
                     <div className={styles.cardInfo}>
                         <p className={styles.cardNumber}>$282</p>
-                        <p className={styles.cardItem}>Refrigerator (Barrows)</p>
+                        <p className={styles.cardItem}>
+                            Refrigerator (Barrows)
+                        </p>
                     </div>
                 </div>
             </section>
@@ -157,10 +163,10 @@ export default function Equipment() {
                         <button
                             className={styles.swapBtn}
                             type='button'
-                            // onClick={handleAddEquipment}
+                            onClick={handleSwapEquipment}
                         >
                             <IoIosSwap size={20} />
-                            Swap 
+                            Swap
                         </button>
                         <button
                             className={styles.addEquipBtn}
@@ -171,6 +177,9 @@ export default function Equipment() {
                             <IoIosAddCircleOutline size={20} />
                             Add Equipment
                         </button>
+                        {/* {showAddEquipmentModal && (
+                            <AddEquipmentModal closeModal={handleCloseModal} />
+                        )} */}
                     </div>
                 </div>
                 {fetchError && <p>{fetchError}</p>}
@@ -303,6 +312,10 @@ export default function Equipment() {
                     </>
                 )}
             </section>
+            {showAddEquipmentModal && (
+                <AddEquipmentModal closeModal={handleCloseModal} />
+            )}
+            {showSwapModal && <SwapModal closeModal={handleSwapModalClose} />}
         </div>
     );
 }
