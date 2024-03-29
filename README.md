@@ -1,6 +1,6 @@
-# Equipment List
+# Equipment Manager
 
-List of equipment at AVA Roasteria. A React/Next.js/JS/CSS/Supabase project.
+Equipment Manager web app for Ava Roasteria. A React/Next.js/JS/CSS/Supabase project.
 
 ## To Run
 
