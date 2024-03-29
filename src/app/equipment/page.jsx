@@ -76,6 +76,26 @@ export default function Equipment() {
         setShowSwapModal(false);
     }
 
+    async function handleDeleteEquipment(id) {
+        try {
+            const { error } = await supabase
+                .from('Equipment')
+                .delete()
+                .eq('id', id);
+
+            if (error) {
+                console.log('ERROR: Couldnt delete equipment');
+                console.log(error);
+            }
+
+            const updatedData = data.nodes.filter((item) => item.id !== id);
+            setData({ nodes: updatedData });
+            setFiltered({ nodes: updatedData });
+        } catch (error) {
+            alert('Error deleting equipment: ' + error.message);
+        }
+    }
+
     // fetch all equipment from backend on first mount only
     useEffect(() => {
         async function fetchAllEquipment() {
@@ -273,6 +293,11 @@ export default function Equipment() {
                                                         <MdDelete
                                                             className={
                                                                 styles.deleteBtn
+                                                            }
+                                                            onClick={() =>
+                                                                handleDeleteEquipment(
+                                                                    item.id
+                                                                )
                                                             }
                                                         />
                                                     </div>
