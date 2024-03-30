@@ -41,7 +41,8 @@ export default function NeedsRepair() {
             const { data, error } = await supabase
                 .from('Equipment')
                 .select('id, Next_Repair_Date, Store_Name, Name, Reason')
-                .eq('Needs_Repair', 'TRUE');
+                .eq('Status_id', 9); // 9 = Needs Repair
+            // .eq('Needs_Repair', 'TRUE');
 
             if (error) {
                 setFetchError('ERROR: Couldnt fetch needs repair nodes');
