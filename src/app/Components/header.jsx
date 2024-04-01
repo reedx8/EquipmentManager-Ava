@@ -2,9 +2,12 @@
 import { useEffect, useState, useRef } from 'react';
 import styles from '../styles/header.module.css';
 import { usePathname } from 'next/navigation';
+import headerImage from '../assets/header_ava.png';
+import Image from 'next/image';
 
 export default function Header() {
     /*
+    // this is what i used:
     const [pathname, setPathname] = useState('');
     let name = usePathname();
 
@@ -32,9 +35,16 @@ export default function Header() {
 
     return (
         <div className={styles.main}>
-            {/* <p>{pathname}</p> */}
             <p>Equipment Manager</p>
-            <p>AVA Roasteria</p>
+            <Image
+                src={headerImage}
+                alt='AVA Roasteria Logo'
+                height={50}
+                width={60}
+            />
+
+            {/* <p>{pathname}</p> */}
+            {/* <p>AVA Roasteria</p> */}
         </div>
     );
 }
