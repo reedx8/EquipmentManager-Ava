@@ -4,6 +4,7 @@ import styles from '../styles/header.module.css';
 import { usePathname } from 'next/navigation';
 
 export default function Header() {
+    /*
     const [pathname, setPathname] = useState('');
     let name = usePathname();
 
@@ -16,6 +17,7 @@ export default function Header() {
             setPathname(name);
         }
     }, [name]);
+    */
 
     /*
     let pathName = usePathname();
@@ -30,7 +32,8 @@ export default function Header() {
 
     return (
         <div className={styles.main}>
-            <p>{pathname}</p>
+            {/* <p>{pathname}</p> */}
+            <p>Equipment Manager</p>
             <p>AVA Roasteria</p>
         </div>
     );

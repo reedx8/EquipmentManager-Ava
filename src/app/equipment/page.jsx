@@ -19,6 +19,7 @@ import { IoIosSwap, IoIosAddCircleOutline } from 'react-icons/io';
 import supabase from '../config/supabaseClient';
 import AddEquipmentModal from '../Components/addequipmentmodal';
 import SwapModal from '../Components/swapmodal';
+import EditEquipmentModal from '../Components/editequipmentmodal';
 // const theme = useTheme(getTheme());
 
 export default function Equipment() {
@@ -30,6 +31,8 @@ export default function Equipment() {
     const theme = useTheme(getTheme());
     const [showAddEquipmentModal, setShowAddEquipmentModal] = useState(false);
     const [showSwapModal, setShowSwapModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
+    const [currentItemDetails, setCurrentItemDetails] = useState(null);
 
     const pagination = usePagination(data, {
         state: {
@@ -63,6 +66,7 @@ export default function Equipment() {
         // console.log('Add Equipment button clicked');
         setShowAddEquipmentModal(true);
     }
+
     function handleSwapEquipment() {
         // console.log('Swap Equipment button clicked');
         setShowSwapModal(true);
@@ -94,6 +98,36 @@ export default function Equipment() {
         } catch (error) {
             alert('Error deleting equipment: ' + error.message);
         }
+    }
+
+    async function handleEditEquipment(id) {
+        try {
+            const { data, error } = await supabase
+                .from('Equipment')
+                .select('*')
+                .eq('id', id)
+                .single();
+
+            if (error) {
+                throw error;
+            }
+
+            setCurrentItemDetails(data);
+            setShowEditModal(true);
+        } catch (error) {
+            alert('Error fetching equipment details: ' + error.message);
+        }
+
+        /*
+        const itemDetails = data.nodes.find((item) => item.id === id);
+        setCurrentItemDetails(itemDetails);
+        setShowEditModal(true);
+        console.log('hello');
+        */
+    }
+
+    function handleEditModalClose() {
+        setShowEditModal(false);
     }
 
     // fetch all equipment from backend on first mount only
@@ -289,6 +323,11 @@ export default function Equipment() {
                                                             className={
                                                                 styles.editBtn
                                                             }
+                                                            onClick={() =>
+                                                                handleEditEquipment(
+                                                                    item.id
+                                                                )
+                                                            }
                                                         />
                                                         <MdDelete
                                                             className={
@@ -341,6 +380,12 @@ export default function Equipment() {
                 <AddEquipmentModal closeModal={handleCloseModal} />
             )}
             {showSwapModal && <SwapModal closeModal={handleSwapModalClose} />}
+            {showEditModal && (
+                <EditEquipmentModal
+                    closeModal={handleEditModalClose}
+                    itemDetails={currentItemDetails}
+                />
+            )}
         </div>
     );
 }
