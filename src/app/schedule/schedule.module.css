@@ -1,4 +1,8 @@
 /* Do not alter or delete: */
+.pageContent {
+    margin-left: 80px;
+}
+
 .pageContent > section {
     margin: 2rem;
 }

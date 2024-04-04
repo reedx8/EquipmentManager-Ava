@@ -1,5 +1,4 @@
-import Header from './Components/header';
-import Sidebar from './Components/sidebar';
+// 'use client';
 import { Inter } from 'next/font/google';
 import styles from './page.module.css';
 import './globals.css';
@@ -15,8 +14,8 @@ export default function RootLayout({ children }) {
     return (
         <html lang='en'>
             <body className={inter.className}>
-                <Sidebar />
-                <Header />
+                {/* <Sidebar /> */}
+                {/* <HeaderBar /> */}
                 <main className={styles.mainLayout}>{children}</main>
             </body>
         </html>

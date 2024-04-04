@@ -2,7 +2,7 @@
 layout.js styles:
 */
 .mainLayout {
-    margin-left: 80px;
+    /* margin-left: 80px; */
     background-color: var(--grey);
     min-height: 100vh;
 }
@@ -10,6 +10,10 @@ layout.js styles:
 /* 
 page.js styles:
 */
+.pageContent {
+    margin-left: 80px;
+}
+
 .pageContent > section {
     margin: 0.7rem;
 }

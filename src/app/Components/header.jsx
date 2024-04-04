@@ -1,11 +1,12 @@
-'use client';
-import { useEffect, useState, useRef } from 'react';
+// 'use client';
+// import { useEffect, useState, useRef } from 'react';
 import styles from '../styles/header.module.css';
 import { usePathname } from 'next/navigation';
 import headerImage from '../assets/header_ava.png';
 import Image from 'next/image';
 
-export default function Header() {
+// Header bar for all pages except login
+export default function HeaderBar() {
     /*
     // this is what i used:
     const [pathname, setPathname] = useState('');

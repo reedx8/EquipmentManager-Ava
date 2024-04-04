@@ -1,10 +1,11 @@
 import styles from '../styles/sidebar.module.css';
 import Link from 'next/link';
-import Image from 'next/image';
+// import Image from 'next/image';
 import { FiHome, FiTool } from 'react-icons/fi';
 import { HiOutlineHome, HiOutlineCalendar } from 'react-icons/hi';
 import { RiSettings3Fill } from 'react-icons/ri';
 
+// Sidebar for all pages except login
 export default function Sidebar() {
     return (
         <div className={styles.main}>
@@ -24,7 +25,7 @@ export default function Sidebar() {
                     </Link>
                 </div>
                 <div>
-                    <Link href='/calendar'>
+                    <Link href='/schedule'>
                         <HiOutlineCalendar
                             className={styles.sidebarIcon}
                             size={35}

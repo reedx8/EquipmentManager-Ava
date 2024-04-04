@@ -20,6 +20,9 @@ import supabase from '../config/supabaseClient';
 import AddEquipmentModal from '../Components/addequipmentmodal';
 import SwapModal from '../Components/swapmodal';
 import EditEquipmentModal from '../Components/editequipmentmodal';
+import Sidebar from '../Components/sidebar';
+import HeaderBar from '../Components/header';
+// import Header from '../Components/header';
 // const theme = useTheme(getTheme());
 
 export default function Equipment() {
@@ -168,224 +171,252 @@ export default function Equipment() {
     }, [search, location]);
 
     return (
-        <div className={styles.pageContent}>
-            <section className={styles.topInfo}>
-                <div className={styles.infoTextCard}>
-                    <p>31 Ava Roasteria</p>
-                    <p>12 Revel</p>
-                    <p>4 DoorDash</p>
-                    <p>4 Grubhub</p>
-                    <p>4 Uber Eats</p>
-                </div>
-                <div className={styles.infoTextCard}>
-                    <p>20 Hall</p>
-                    <p>15 Barrows</p>
-                    <p>17 Kruse</p>
-                    <p>12 Orenco</p>
-                    <p>10 Bakery</p>
-                    <p>6 Office</p>
-                </div>
-                <div className={styles.card}>
-                    <div className={styles.cardTitle}>
-                        <h3>Most Repairs</h3>
+        <>
+            <Sidebar />
+            <HeaderBar />
+            <div className={styles.pageContent}>
+                <section className={styles.topInfo}>
+                    <div className={styles.infoTextCard}>
+                        <p>31 Ava Roasteria</p>
+                        <p>12 Revel</p>
+                        <p>4 DoorDash</p>
+                        <p>4 Grubhub</p>
+                        <p>4 Uber Eats</p>
                     </div>
-                    <div className={styles.cardInfo}>
-                        <p className={styles.cardNumber}>4</p>
-                        <p className={styles.cardItem}>
-                            Espresso Machine (Hall)
-                        </p>
+                    <div className={styles.infoTextCard}>
+                        <p>20 Hall</p>
+                        <p>15 Barrows</p>
+                        <p>17 Kruse</p>
+                        <p>12 Orenco</p>
+                        <p>10 Bakery</p>
+                        <p>6 Office</p>
                     </div>
-                </div>
-                <div className={styles.card}>
-                    <div className={styles.cardTitle}>
-                        <h3>Highest Cost</h3>
+                    <div className={styles.card}>
+                        <div className={styles.cardTitle}>
+                            <h3>Most Repairs</h3>
+                        </div>
+                        <div className={styles.cardInfo}>
+                            <p className={styles.cardNumber}>4</p>
+                            <p className={styles.cardItem}>
+                                Espresso Machine (Hall)
+                            </p>
+                        </div>
                     </div>
-                    <div className={styles.cardInfo}>
-                        <p className={styles.cardNumber}>$282</p>
-                        <p className={styles.cardItem}>
-                            Refrigerator (Barrows)
-                        </p>
+                    <div className={styles.card}>
+                        <div className={styles.cardTitle}>
+                            <h3>Highest Cost</h3>
+                        </div>
+                        <div className={styles.cardInfo}>
+                            <p className={styles.cardNumber}>$282</p>
+                            <p className={styles.cardItem}>
+                                Refrigerator (Barrows)
+                            </p>
+                        </div>
                     </div>
-                </div>
-            </section>
-            <section>
-                <div className={styles.headerRow}>
-                    <div>
-                        <h1 className={styles.title}>All Equipment</h1>
-                    </div>
-                    <div className={styles.btnSection}>
-                        <button
-                            className={styles.swapBtn}
-                            type='button'
-                            onClick={handleSwapEquipment}
-                        >
-                            <IoIosSwap size={20} />
-                            Swap
-                        </button>
-                        <button
-                            className={styles.addEquipBtn}
-                            type='button'
-                            onClick={handleAddEquipment}
-                        >
-                            {/* <MdAddCircle size={20} /> */}
-                            <IoIosAddCircleOutline size={20} />
-                            Add Equipment
-                        </button>
-                        {/* {showAddEquipmentModal && (
+                </section>
+                <section>
+                    <div className={styles.headerRow}>
+                        <div>
+                            <h1 className={styles.title}>All Equipment</h1>
+                        </div>
+                        <div className={styles.btnSection}>
+                            <button
+                                className={styles.swapBtn}
+                                type='button'
+                                onClick={handleSwapEquipment}
+                            >
+                                <IoIosSwap size={20} />
+                                Swap
+                            </button>
+                            <button
+                                className={styles.addEquipBtn}
+                                type='button'
+                                onClick={handleAddEquipment}
+                            >
+                                {/* <MdAddCircle size={20} /> */}
+                                <IoIosAddCircleOutline size={20} />
+                                Add Equipment
+                            </button>
+                            {/* {showAddEquipmentModal && (
                             <AddEquipmentModal closeModal={handleCloseModal} />
                         )} */}
+                        </div>
                     </div>
-                </div>
-                {fetchError && <p>{fetchError}</p>}
-                {data && (
-                    <>
-                        <div className={styles.tableBar}>
-                            <form>
-                                <input
-                                    type='reset'
-                                    value='Clear selection'
-                                    className={styles.tableBarChild}
-                                    onClick={handleReset}
-                                />
-                                <label htmlFor='locations'></label>
-                                <select
-                                    name='locations'
-                                    id='locations'
-                                    onChange={handleLocationSelect}
-                                    className={styles.tableBarChild}
-                                    defaultValue='default'
-                                >
-                                    <option
-                                        value='default'
-                                        // defaultValue='default'
-                                        disabled
-                                        // hidden
+                    {fetchError && <p>{fetchError}</p>}
+                    {data && (
+                        <>
+                            <div className={styles.tableBar}>
+                                <form>
+                                    <input
+                                        type='reset'
+                                        value='Clear selection'
+                                        className={styles.tableBarChild}
+                                        onClick={handleReset}
+                                    />
+                                    <label htmlFor='locations'></label>
+                                    <select
+                                        name='locations'
+                                        id='locations'
+                                        onChange={handleLocationSelect}
+                                        className={styles.tableBarChild}
+                                        defaultValue='default'
                                     >
-                                        Select location...
-                                    </option>
-                                    <optgroup label='Stores'>
-                                        <option value='hall'>Hall</option>
-                                        <option value='barrows'>Barrows</option>
-                                        <option value='kruse'>Kruse</option>
-                                        <option value='orenco'>Orenco</option>
-                                    </optgroup>
-                                    <optgroup label='Other locations'>
-                                        <option value='bakery'>Bakery</option>
-                                        <option value='office'>Office</option>
-                                    </optgroup>
-                                </select>
-                            </form>
-
-                            <label htmlFor='search'>
-                                {/* Search by name:{' '} */}
-                                <input
-                                    id={styles.searchField}
-                                    type='text'
-                                    value={search}
-                                    onChange={handleSearch}
-                                    placeholder='Search by name'
-                                    className={styles.tableBarChild}
-                                />
-                            </label>
-                        </div>
-                        <Table
-                            data={filtered}
-                            theme={theme}
-                            pagination={pagination}
-                        >
-                            {(allItems) => (
-                                <>
-                                    <Header>
-                                        <HeaderRow>
-                                            <HeaderCell>Name</HeaderCell>
-                                            <HeaderCell>Location</HeaderCell>
-                                            <HeaderCell>Total Cost</HeaderCell>
-                                            <HeaderCell>Provider</HeaderCell>
-                                            <HeaderCell></HeaderCell>
-                                        </HeaderRow>
-                                    </Header>
-                                    <Body>
-                                        {allItems.map((item) => (
-                                            <Row key={item.id} item={item}>
-                                                <Cell>{item.Name}</Cell>
-                                                <Cell>{item.Store_Name}</Cell>
-                                                <Cell>${item.Total_Cost}</Cell>
-                                                <Cell>
-                                                    {item.Provider_Name}
-                                                </Cell>
-                                                <Cell>
-                                                    <div
-                                                        className={
-                                                            styles.editDeleteColumn
-                                                        }
-                                                    >
-                                                        <MdEdit
-                                                            className={
-                                                                styles.editBtn
-                                                            }
-                                                            onClick={() =>
-                                                                handleEditEquipment(
-                                                                    item.id
-                                                                )
-                                                            }
-                                                        />
-                                                        <MdDelete
-                                                            className={
-                                                                styles.deleteBtn
-                                                            }
-                                                            onClick={() =>
-                                                                handleDeleteEquipment(
-                                                                    item.id
-                                                                )
-                                                            }
-                                                        />
-                                                    </div>
-                                                </Cell>
-                                            </Row>
-                                        ))}
-                                    </Body>
-                                </>
-                            )}
-                        </Table>
-                        <div className={styles.paginationBar}>
-                            <div>
-                                Page:{' '}
-                                {pagination.state
-                                    .getPages(filtered.nodes)
-                                    .map((_, index) => (
-                                        <button
-                                            className={styles.paginationButtons}
-                                            key={index}
-                                            type='button'
-                                            style={{
-                                                fontWeight:
-                                                    pagination.state.page ==
-                                                    index
-                                                        ? 'bold'
-                                                        : 'normal',
-                                            }}
-                                            onClick={() =>
-                                                pagination.fns.onSetPage(index)
-                                            }
+                                        <option
+                                            value='default'
+                                            // defaultValue='default'
+                                            disabled
+                                            // hidden
                                         >
-                                            {index + 1}
-                                        </button>
-                                    ))}
+                                            Select location...
+                                        </option>
+                                        <optgroup label='Stores'>
+                                            <option value='hall'>Hall</option>
+                                            <option value='barrows'>
+                                                Barrows
+                                            </option>
+                                            <option value='kruse'>Kruse</option>
+                                            <option value='orenco'>
+                                                Orenco
+                                            </option>
+                                        </optgroup>
+                                        <optgroup label='Other locations'>
+                                            <option value='bakery'>
+                                                Bakery
+                                            </option>
+                                            <option value='office'>
+                                                Office
+                                            </option>
+                                        </optgroup>
+                                    </select>
+                                </form>
+
+                                <label htmlFor='search'>
+                                    {/* Search by name:{' '} */}
+                                    <input
+                                        id={styles.searchField}
+                                        type='text'
+                                        value={search}
+                                        onChange={handleSearch}
+                                        placeholder='Search by name'
+                                        className={styles.tableBarChild}
+                                    />
+                                </label>
                             </div>
-                        </div>
-                    </>
+                            <Table
+                                data={filtered}
+                                theme={theme}
+                                pagination={pagination}
+                            >
+                                {(allItems) => (
+                                    <>
+                                        <Header>
+                                            <HeaderRow>
+                                                <HeaderCell>Name</HeaderCell>
+                                                <HeaderCell>
+                                                    Location
+                                                </HeaderCell>
+                                                <HeaderCell>
+                                                    Total Cost
+                                                </HeaderCell>
+                                                <HeaderCell>
+                                                    Provider
+                                                </HeaderCell>
+                                                <HeaderCell></HeaderCell>
+                                            </HeaderRow>
+                                        </Header>
+                                        <Body>
+                                            {allItems.map((item) => (
+                                                <Row key={item.id} item={item}>
+                                                    <Cell>{item.Name}</Cell>
+                                                    <Cell>
+                                                        {item.Store_Name}
+                                                    </Cell>
+                                                    <Cell>
+                                                        ${item.Total_Cost}
+                                                    </Cell>
+                                                    <Cell>
+                                                        {item.Provider_Name}
+                                                    </Cell>
+                                                    <Cell>
+                                                        <div
+                                                            className={
+                                                                styles.editDeleteColumn
+                                                            }
+                                                        >
+                                                            <MdEdit
+                                                                className={
+                                                                    styles.editBtn
+                                                                }
+                                                                onClick={() =>
+                                                                    handleEditEquipment(
+                                                                        item.id
+                                                                    )
+                                                                }
+                                                            />
+                                                            <MdDelete
+                                                                className={
+                                                                    styles.deleteBtn
+                                                                }
+                                                                onClick={() =>
+                                                                    handleDeleteEquipment(
+                                                                        item.id
+                                                                    )
+                                                                }
+                                                            />
+                                                        </div>
+                                                    </Cell>
+                                                </Row>
+                                            ))}
+                                        </Body>
+                                    </>
+                                )}
+                            </Table>
+                            <div className={styles.paginationBar}>
+                                <div>
+                                    Page:{' '}
+                                    {pagination.state
+                                        .getPages(filtered.nodes)
+                                        .map((_, index) => (
+                                            <button
+                                                className={
+                                                    styles.paginationButtons
+                                                }
+                                                key={index}
+                                                type='button'
+                                                style={{
+                                                    fontWeight:
+                                                        pagination.state.page ==
+                                                        index
+                                                            ? 'bold'
+                                                            : 'normal',
+                                                }}
+                                                onClick={() =>
+                                                    pagination.fns.onSetPage(
+                                                        index
+                                                    )
+                                                }
+                                            >
+                                                {index + 1}
+                                            </button>
+                                        ))}
+                                </div>
+                            </div>
+                        </>
+                    )}
+                </section>
+                {showAddEquipmentModal && (
+                    <AddEquipmentModal closeModal={handleCloseModal} />
                 )}
-            </section>
-            {showAddEquipmentModal && (
-                <AddEquipmentModal closeModal={handleCloseModal} />
-            )}
-            {showSwapModal && <SwapModal closeModal={handleSwapModalClose} />}
-            {showEditModal && (
-                <EditEquipmentModal
-                    closeModal={handleEditModalClose}
-                    itemDetails={currentItemDetails}
-                />
-            )}
-        </div>
+                {showSwapModal && (
+                    <SwapModal closeModal={handleSwapModalClose} />
+                )}
+                {showEditModal && (
+                    <EditEquipmentModal
+                        closeModal={handleEditModalClose}
+                        itemDetails={currentItemDetails}
+                    />
+                )}
+            </div>
+        </>
     );
 }
