@@ -10,6 +10,7 @@ export const metadata = {
     description: 'Equipment Manager web app, AVA Roasteria',
 };
 
+// Rootlayout is the top level layout component for the app (children = pages/components)
 export default function RootLayout({ children }) {
     return (
         <html lang='en'>
