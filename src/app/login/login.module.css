@@ -57,6 +57,7 @@
 }
 
 .loginForm > button {
+    color: black;
     margin-top: 1rem;
     background-color: #ffffff;
     padding: 5px 0;
