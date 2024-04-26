@@ -20,6 +20,7 @@ import supabase from '../config/supabaseClient';
 import AddEquipmentModal from '../Components/addequipmentmodal';
 import SwapModal from '../Components/swapmodal';
 import EditEquipmentModal from '../Components/editequipmentmodal';
+import DeleteEquipmentModal from '../Components/deleteequipmentmodal';
 import Sidebar from '../Components/sidebar';
 import HeaderBar from '../Components/header';
 // import Header from '../Components/header';
@@ -35,6 +36,8 @@ export default function Equipment() {
     const [showAddEquipmentModal, setShowAddEquipmentModal] = useState(false);
     const [showSwapModal, setShowSwapModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [confirmDelete, setConfirmDelete] = useState(false);
     const [currentItemDetails, setCurrentItemDetails] = useState(null);
 
     const pagination = usePagination(data, {
@@ -83,24 +86,54 @@ export default function Equipment() {
         setShowSwapModal(false);
     }
 
+    // function handleDeleteModal() {
+    //     setShowDeleteModal(true);
+    // }
+
+    function handleDeleteModalClose() {
+        setShowDeleteModal(false);
+    }
+
     async function handleDeleteEquipment(id) {
+        // setShowDeleteModal(true);
+        console.log('delete button clicked ');
+        console.log('id: ' + id);
+
         try {
-            const { error } = await supabase
+            const { data, error } = await supabase
                 .from('Equipment')
-                .delete()
-                .eq('id', id);
+                .select('*')
+                .eq('id', id)
+                .single();
 
             if (error) {
-                console.log('ERROR: Couldnt delete equipment');
-                console.log(error);
+                throw error;
             }
-
-            const updatedData = data.nodes.filter((item) => item.id !== id);
-            setData({ nodes: updatedData });
-            setFiltered({ nodes: updatedData });
+            setCurrentItemDetails(data);
+            setShowDeleteModal(true);
         } catch (error) {
-            alert('Error deleting equipment: ' + error.message);
+            alert('Error fetching equipment details: ' + error.message);
         }
+
+        // setShowDeleteModal(false);
+
+        // try {
+        //     const { error } = await supabase
+        //         .from('Equipment')
+        //         .delete()
+        //         .eq('id', id);
+
+        //     if (error) {
+        //         console.log('ERROR: Couldnt delete equipment');
+        //         console.log(error);
+        //     }
+
+        //     const updatedData = data.nodes.filter((item) => item.id !== id);
+        //     setData({ nodes: updatedData });
+        //     setFiltered({ nodes: updatedData });
+        // } catch (error) {
+        //     alert('Error deleting equipment: ' + error.message);
+        // }
     }
 
     async function handleEditEquipment(id) {
@@ -413,6 +446,12 @@ export default function Equipment() {
                 {showEditModal && (
                     <EditEquipmentModal
                         closeModal={handleEditModalClose}
+                        itemDetails={currentItemDetails}
+                    />
+                )}
+                {showDeleteModal && (
+                    <DeleteEquipmentModal
+                        closeModal={handleDeleteModalClose}
                         itemDetails={currentItemDetails}
                     />
                 )}

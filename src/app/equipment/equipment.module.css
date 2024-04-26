@@ -187,6 +187,9 @@ Enter in your css below:
 .modalButtons {
     padding: 0.5rem;
     border-radius: 5px;
+    background: none;
+    border: 1px solid black;
+    cursor: pointer;
 }
 
 /* sdkljaf */
