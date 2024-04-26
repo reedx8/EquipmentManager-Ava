@@ -4,6 +4,9 @@ import styles from '../styles/header.module.css';
 import { usePathname } from 'next/navigation';
 import headerImage from '../assets/header_ava.png';
 import Image from 'next/image';
+import title from '../assets/title.png';
+import title2 from '../assets/title2.png';
+import Link from 'next/link';
 
 // Header bar for all pages except login
 export default function HeaderBar() {
@@ -36,13 +39,24 @@ export default function HeaderBar() {
 
     return (
         <div className={styles.main}>
-            <p>Equipment Manager</p>
-            <Image
-                src={headerImage}
-                alt='AVA Roasteria Logo'
-                height={50}
-                width={60}
-            />
+            {/* <p>Equipment Manager</p> */}
+            <Link href='/'>
+                <Image
+                    src={title2}
+                    alt='Equipment Manager'
+                    height={40}
+                    width={230}
+                />
+            </Link>
+
+            <Link href='/'>
+                <Image
+                    src={headerImage}
+                    alt='AVA Roasteria Logo'
+                    height={50}
+                    width={60}
+                />
+            </Link>
 
             {/* <p>{pathname}</p> */}
             {/* <p>AVA Roasteria</p> */}

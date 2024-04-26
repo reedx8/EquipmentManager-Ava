@@ -4,6 +4,10 @@ import Link from 'next/link';
 import { FiHome, FiTool } from 'react-icons/fi';
 import { HiOutlineHome, HiOutlineCalendar } from 'react-icons/hi';
 import { RiSettings3Fill } from 'react-icons/ri';
+import Image from 'next/image';
+import dash from '../assets/dash.png';
+import hammer from '../assets/hammer.png';
+import cal_icon from '../assets/cal_icon.png';
 
 // Sidebar for all pages except login
 export default function Sidebar() {
@@ -12,24 +16,42 @@ export default function Sidebar() {
             <div className={styles.upperSidebar}>
                 <div>
                     <Link href='/'>
-                        <HiOutlineHome
+                        <Image
+                            src={dash}
+                            width={35}
+                            height={35}
+                            className={styles.sidebarIcon}
+                        />
+                        {/* <HiOutlineHome
                             className={styles.sidebarIcon}
                             size={35}
-                        />
+                        /> */}
                     </Link>
                     <div className={styles.sidebarLine}></div>
                 </div>
                 <div>
                     <Link href='/equipment'>
-                        <FiTool className={styles.sidebarIcon} size={35} />
+                        <Image
+                            src={hammer}
+                            width={35}
+                            height={35}
+                            className={styles.sidebarIcon}
+                        />
+                        {/* <FiTool className={styles.sidebarIcon} size={35} /> */}
                     </Link>
                 </div>
                 <div>
                     <Link href='/schedule'>
-                        <HiOutlineCalendar
+                        <Image
+                            src={cal_icon}
+                            width={35}
+                            height={35}
+                            className={styles.sidebarIcon}
+                        />
+                        {/* <HiOutlineCalendar
                             className={styles.sidebarIcon}
                             size={35}
-                        />
+                        /> */}
                     </Link>
                 </div>
             </div>

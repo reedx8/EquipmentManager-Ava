@@ -7,6 +7,13 @@
     background-size: cover;
 }
 
+.avaLogo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0.7rem;
+}
+
 .loginContainer {
     height: 400px;
     width: 350px;

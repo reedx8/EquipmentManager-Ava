@@ -6,12 +6,18 @@
     display: grid;
     grid-template-columns: 30% 1fr;
     background-color: white;
+    /* background-image: url('../assets/sky.jpg'); */
+    /* background-image: url('../assets/Firewatch.jpg'); */
+    background-size: cover;
     width: 375px;
     height: 200px;
 
     border: 1px solid #e0e0e0;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.calBg {
 }
 
 .dateCardSide {
@@ -21,6 +27,10 @@
     border-right: 3px solid var(--grey);
     margin-right: 0.5rem;
     position: relative; /* This is needed for the circle to be positioned correctly relative to its card */
+    /* background-image: url('../assets/Venice.jpg'); */
+    background-image: url('../assets/Firewatch.jpg');
+    background-position: center;
+    border-radius: 5px;
 }
 
 .circle {
@@ -37,6 +47,11 @@
         -50%,
         -50%
     ); /* This centers the circle relative to the line */
+
+    /* Centers calendar icon inside the circle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .dateCardInfo {

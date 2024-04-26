@@ -4,6 +4,8 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import supabase from '../config/supabaseClient';
 import styles from './login.module.css';
+import Image from 'next/image';
+import header_ava from '../assets/header_ava.png';
 
 export default function LogIn() {
     const router = useRouter();
@@ -43,6 +45,13 @@ export default function LogIn() {
 
     return (
         <div className={styles.pageContent}>
+            <Image
+                src={header_ava}
+                alt='AVA Roasteria Logo'
+                height={50}
+                width={60}
+                className={styles.avaLogo}
+            />
             <div className={styles.loginContainer}>
                 <h1>Login to Ava</h1>
                 <form className={styles.loginForm} onSubmit={handleLogin}>
