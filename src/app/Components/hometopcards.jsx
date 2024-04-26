@@ -14,14 +14,19 @@ export default function HomeTopCards() {
         <div className={styles.main}>
             <div className={styles.card}>
                 {/* <MdOutlineNumbers /> */}
-                <Image src={hashtag} width={20} height={20} />
+                <Image src={hashtag} width={20} height={20} alt='# icon' />
                 <h2 className={styles.cardNumber}>56</h2>
                 <p className={styles.cardSubtitle}>Pcs. of Equipment</p>
             </div>
             <div className={styles.cardWithPercent}>
                 <div>
                     {/* <GoTools /> */}
-                    <Image src={wrench} width={20} height={20} />
+                    <Image
+                        src={wrench}
+                        width={20}
+                        height={20}
+                        alt='wrench icon'
+                    />
                     <h2 className={styles.cardNumber}>3</h2>
                     <p className={styles.cardSubtitle}>Needs Repair</p>
                 </div>
@@ -32,7 +37,7 @@ export default function HomeTopCards() {
             <div className={styles.cardWithPercent}>
                 <div>
                     {/* <GrInProgress /> */}
-                    <Image src={time} width={20} height={20} />
+                    <Image src={time} width={20} height={20} alt='time icon' />
                     <h2 className={styles.cardNumber}>0</h2>
                     <p className={styles.cardSubtitle}>Being Repaired</p>
                 </div>
@@ -42,7 +47,7 @@ export default function HomeTopCards() {
             </div>
             <div className={styles.card}>
                 {/* <LuCalendarClock /> */}
-                <Image src={cal} width={20} height={20} />
+                <Image src={cal} width={20} height={20} alt='calendar icon' />
                 <h2 className={styles.cardNumber}>4/2/2024</h2>
                 <p className={styles.cardSubtitle}>Next Repair Date</p>
             </div>
