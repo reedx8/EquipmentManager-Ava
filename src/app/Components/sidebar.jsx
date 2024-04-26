@@ -21,6 +21,7 @@ export default function Sidebar() {
                             width={35}
                             height={35}
                             className={styles.sidebarIcon}
+                            alt='Dashboard page'
                         />
                         {/* <HiOutlineHome
                             className={styles.sidebarIcon}
@@ -36,6 +37,7 @@ export default function Sidebar() {
                             width={35}
                             height={35}
                             className={styles.sidebarIcon}
+                            alt='Equipment page'
                         />
                         {/* <FiTool className={styles.sidebarIcon} size={35} /> */}
                     </Link>
@@ -47,6 +49,7 @@ export default function Sidebar() {
                             width={35}
                             height={35}
                             className={styles.sidebarIcon}
+                            alt='Schedule page'
                         />
                         {/* <HiOutlineCalendar
                             className={styles.sidebarIcon}

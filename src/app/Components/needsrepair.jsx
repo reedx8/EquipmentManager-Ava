@@ -16,7 +16,7 @@ import { useTheme } from '@table-library/react-table-library/theme';
 import { getTheme } from '@table-library/react-table-library/baseline';
 import { usePagination } from '@table-library/react-table-library/pagination';
 import supabase from '../config/supabaseClient';
-const theme = useTheme(getTheme());
+// const theme = useTheme(getTheme());
 const key = 'Composed Table';
 
 export default function NeedsRepair() {
@@ -30,6 +30,7 @@ export default function NeedsRepair() {
         },
         onChange: onPaginationChange,
     });
+    const theme = useTheme(getTheme());
 
     // Delete when done with testing:
     function onPaginationChange(action, state) {

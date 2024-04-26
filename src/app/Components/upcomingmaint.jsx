@@ -21,7 +21,12 @@ export default function UpcomingMaint() {
                     </p>
                     <p className={styles.month}>July</p>
                     <div className={styles.circle}>
-                        <Image src={calIcon} width={30} height={30} />
+                        <Image
+                            src={calIcon}
+                            width={30}
+                            height={30}
+                            alt='calendar icon'
+                        />
                     </div>
                 </div>
                 <div className={styles.dateCardInfo}>
