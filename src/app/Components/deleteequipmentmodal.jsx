@@ -4,7 +4,11 @@ import { useState, useEffect } from 'react';
 import styles from '../equipment/equipment.module.css';
 import supabase from '../config/supabaseClient';
 
-export default function DeleteEquipmentModal({ closeModal, itemDetails }) {
+export default function DeleteEquipmentModal({
+    closeModal,
+    itemDetails,
+    refreshEquipment,
+}) {
     const [equipmentId, setEquipmentId] = useState(itemDetails.id);
     const [equipmentName, setEquipmentName] = useState(itemDetails.Name);
 
@@ -25,6 +29,7 @@ export default function DeleteEquipmentModal({ closeModal, itemDetails }) {
         }
 
         closeModal();
+        refreshEquipment();
     }
 
     return (

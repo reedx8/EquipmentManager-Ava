@@ -5,7 +5,11 @@ import { useState, useEffect } from 'react';
 import styles from '../equipment/equipment.module.css';
 import supabase from '../config/supabaseClient';
 
-export default function EditEquipmentModal({ closeModal, itemDetails }) {
+export default function EditEquipmentModal({
+    closeModal,
+    itemDetails,
+    refreshEquipment,
+}) {
     const [equipmentId, setEquipmentId] = useState(itemDetails.id);
     const [equipmentName, setEquipmentName] = useState(itemDetails.Name);
     const [equipmentType, setEquipmentType] = useState(itemDetails.Equip_Type);
@@ -65,6 +69,7 @@ export default function EditEquipmentModal({ closeModal, itemDetails }) {
             alert('Error updating equipment: ' + error.message);
         } else {
             closeModal();
+            refreshEquipment();
         }
     }
 

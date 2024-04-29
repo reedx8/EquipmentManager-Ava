@@ -37,8 +37,8 @@ export default function Equipment() {
     const [showSwapModal, setShowSwapModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
-    const [confirmDelete, setConfirmDelete] = useState(false);
     const [currentItemDetails, setCurrentItemDetails] = useState(null);
+    // const [loading, setLoading] = useState(true);
 
     const pagination = usePagination(data, {
         state: {
@@ -86,12 +86,11 @@ export default function Equipment() {
         setShowSwapModal(false);
     }
 
-    // function handleDeleteModal() {
-    //     setShowDeleteModal(true);
-    // }
-
     function handleDeleteModalClose() {
         setShowDeleteModal(false);
+    }
+    function handleEditModalClose() {
+        setShowEditModal(false);
     }
 
     async function handleDeleteEquipment(id) {
@@ -161,31 +160,28 @@ export default function Equipment() {
         console.log('hello');
         */
     }
+    async function fetchAllEquipment() {
+        const { data, error } = await supabase
+            .from('Equipment')
+            .select('id, Name, Store_Name, Total_Cost, Provider_Name');
 
-    function handleEditModalClose() {
-        setShowEditModal(false);
+        if (error) {
+            setData(null);
+            setFiltered(null);
+            setFetchError('ERROR: Couldnt fetch all equipment');
+            console.log(error);
+        }
+        if (data) {
+            setData({ nodes: data }); // data needs to be in a nodes prop for react-table-library
+            setFiltered({ nodes: data });
+            // console.log(data.nodes);
+            setFetchError(null);
+        }
+        // setLoading(false);
     }
 
     // fetch all equipment from backend on first mount only
     useEffect(() => {
-        async function fetchAllEquipment() {
-            const { data, error } = await supabase
-                .from('Equipment')
-                .select('id, Name, Store_Name, Total_Cost, Provider_Name');
-
-            if (error) {
-                setData(null);
-                setFiltered(null);
-                setFetchError('ERROR: Couldnt fetch all equipment');
-                console.log(error);
-            }
-            if (data) {
-                setData({ nodes: data }); // data needs to be in a nodes prop for react-table-library
-                setFiltered({ nodes: data });
-                // console.log(data.nodes);
-                setFetchError(null);
-            }
-        }
         fetchAllEquipment();
     }, []);
 
@@ -438,7 +434,10 @@ export default function Equipment() {
                     )}
                 </section>
                 {showAddEquipmentModal && (
-                    <AddEquipmentModal closeModal={handleCloseModal} />
+                    <AddEquipmentModal
+                        closeModal={handleCloseModal}
+                        refreshEquipment={fetchAllEquipment}
+                    />
                 )}
                 {showSwapModal && (
                     <SwapModal closeModal={handleSwapModalClose} />
@@ -447,12 +446,14 @@ export default function Equipment() {
                     <EditEquipmentModal
                         closeModal={handleEditModalClose}
                         itemDetails={currentItemDetails}
+                        refreshEquipment={fetchAllEquipment}
                     />
                 )}
                 {showDeleteModal && (
                     <DeleteEquipmentModal
                         closeModal={handleDeleteModalClose}
                         itemDetails={currentItemDetails}
+                        refreshEquipment={fetchAllEquipment}
                     />
                 )}
             </div>

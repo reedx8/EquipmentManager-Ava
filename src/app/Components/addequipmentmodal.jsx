@@ -34,6 +34,7 @@ export default function AddEquipmentModal(props) {
             alert('Error adding equipment: ' + error.message);
         } else {
             props.closeModal();
+            props.refreshEquipment();
         }
     };
 
