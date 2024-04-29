@@ -23,8 +23,6 @@ import EditEquipmentModal from '../Components/editequipmentmodal';
 import DeleteEquipmentModal from '../Components/deleteequipmentmodal';
 import Sidebar from '../Components/sidebar';
 import HeaderBar from '../Components/header';
-// import Header from '../Components/header';
-// const theme = useTheme(getTheme());
 
 export default function Equipment() {
     const [data, setData] = useState(null); // Initial data from backend
@@ -68,29 +66,41 @@ export default function Equipment() {
         // console.log(location);
     }
 
-    function handleAddEquipment() {
-        // console.log('Add Equipment button clicked');
-        setShowAddEquipmentModal(true);
+    function openModal(modalType) {
+        switch (modalType) {
+            case 'add':
+                setShowAddEquipmentModal(true);
+                break;
+            case 'swap':
+                setShowSwapModal(true);
+                break;
+            case 'edit':
+                setShowEditModal(true);
+                break;
+            case 'delete':
+                setShowDeleteModal(true);
+                break;
+            default:
+                console.log('Invalid modal type');
+        }
     }
-
-    function handleSwapEquipment() {
-        // console.log('Swap Equipment button clicked');
-        setShowSwapModal(true);
-    }
-
-    function handleCloseModal() {
-        setShowAddEquipmentModal(false);
-    }
-
-    function handleSwapModalClose() {
-        setShowSwapModal(false);
-    }
-
-    function handleDeleteModalClose() {
-        setShowDeleteModal(false);
-    }
-    function handleEditModalClose() {
-        setShowEditModal(false);
+    function closeModal(modalType) {
+        switch (modalType) {
+            case 'add':
+                setShowAddEquipmentModal(false);
+                break;
+            case 'swap':
+                setShowSwapModal(false);
+                break;
+            case 'edit':
+                setShowEditModal(false);
+                break;
+            case 'delete':
+                setShowDeleteModal(false);
+                break;
+            default:
+                console.log('Invalid modal type');
+        }
     }
 
     async function handleDeleteEquipment(id) {
@@ -109,30 +119,11 @@ export default function Equipment() {
                 throw error;
             }
             setCurrentItemDetails(data);
-            setShowDeleteModal(true);
+            // setShowDeleteModal(true);
+            openModal('delete');
         } catch (error) {
             alert('Error fetching equipment details: ' + error.message);
         }
-
-        // setShowDeleteModal(false);
-
-        // try {
-        //     const { error } = await supabase
-        //         .from('Equipment')
-        //         .delete()
-        //         .eq('id', id);
-
-        //     if (error) {
-        //         console.log('ERROR: Couldnt delete equipment');
-        //         console.log(error);
-        //     }
-
-        //     const updatedData = data.nodes.filter((item) => item.id !== id);
-        //     setData({ nodes: updatedData });
-        //     setFiltered({ nodes: updatedData });
-        // } catch (error) {
-        //     alert('Error deleting equipment: ' + error.message);
-        // }
     }
 
     async function handleEditEquipment(id) {
@@ -148,7 +139,8 @@ export default function Equipment() {
             }
 
             setCurrentItemDetails(data);
-            setShowEditModal(true);
+            // setShowEditModal(true);
+            openModal('edit');
         } catch (error) {
             alert('Error fetching equipment details: ' + error.message);
         }
@@ -160,6 +152,7 @@ export default function Equipment() {
         console.log('hello');
         */
     }
+
     async function fetchAllEquipment() {
         const { data, error } = await supabase
             .from('Equipment')
@@ -252,7 +245,8 @@ export default function Equipment() {
                             <button
                                 className={styles.swapBtn}
                                 type='button'
-                                onClick={handleSwapEquipment}
+                                onClick={() => openModal('swap')}
+                                // onClick={handleSwapEquipment}
                             >
                                 <IoIosSwap size={20} />
                                 Swap
@@ -260,7 +254,8 @@ export default function Equipment() {
                             <button
                                 className={styles.addEquipBtn}
                                 type='button'
-                                onClick={handleAddEquipment}
+                                onClick={() => openModal('add')}
+                                // onClick={handleAddEquipment}
                             >
                                 {/* <MdAddCircle size={20} /> */}
                                 <IoIosAddCircleOutline size={20} />
@@ -435,23 +430,21 @@ export default function Equipment() {
                 </section>
                 {showAddEquipmentModal && (
                     <AddEquipmentModal
-                        closeModal={handleCloseModal}
+                        closeModal={closeModal}
                         refreshEquipment={fetchAllEquipment}
                     />
                 )}
-                {showSwapModal && (
-                    <SwapModal closeModal={handleSwapModalClose} />
-                )}
+                {showSwapModal && <SwapModal closeModal={closeModal} />}
                 {showEditModal && (
                     <EditEquipmentModal
-                        closeModal={handleEditModalClose}
+                        closeModal={closeModal}
                         itemDetails={currentItemDetails}
                         refreshEquipment={fetchAllEquipment}
                     />
                 )}
                 {showDeleteModal && (
                     <DeleteEquipmentModal
-                        closeModal={handleDeleteModalClose}
+                        closeModal={closeModal}
                         itemDetails={currentItemDetails}
                         refreshEquipment={fetchAllEquipment}
                     />

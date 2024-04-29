@@ -28,7 +28,7 @@ export default function DeleteEquipmentModal({
             alert('Error deleting equipment: ' + error.message);
         }
 
-        closeModal();
+        closeModal('delete');
         refreshEquipment();
     }
 
@@ -60,7 +60,7 @@ export default function DeleteEquipmentModal({
                     </div>
                     <div className={styles.buttonsRow}>
                         <button
-                            onClick={() => closeModal()}
+                            onClick={() => closeModal('delete')}
                             className={styles.modalButtons}
                         >
                             Cancel

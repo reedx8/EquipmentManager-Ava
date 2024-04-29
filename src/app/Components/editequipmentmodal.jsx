@@ -68,7 +68,7 @@ export default function EditEquipmentModal({
             console.error('Error updating equipment: ' + error);
             alert('Error updating equipment: ' + error.message);
         } else {
-            closeModal();
+            closeModal('edit');
             refreshEquipment();
         }
     }
@@ -247,7 +247,7 @@ export default function EditEquipmentModal({
                     <div className={styles.buttonsRow}>
                         <button
                             className={styles.modalButtons}
-                            onClick={closeModal}
+                            onClick={() => closeModal('edit')}
                             type='button'
                         >
                             Close

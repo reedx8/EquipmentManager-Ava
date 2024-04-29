@@ -33,7 +33,7 @@ export default function AddEquipmentModal(props) {
         if (error) {
             alert('Error adding equipment: ' + error.message);
         } else {
-            props.closeModal();
+            props.closeModal('add');
             props.refreshEquipment();
         }
     };
@@ -111,7 +111,7 @@ export default function AddEquipmentModal(props) {
                     <div className={styles.buttonsRow}>
                         <button
                             className={styles.modalButtons}
-                            onClick={() => props.closeModal()}
+                            onClick={() => props.closeModal('add')}
                             type='button'
                         >
                             Close

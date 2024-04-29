@@ -38,14 +38,14 @@ export default function SwapModal(props) {
                     <div className={styles.buttonsRow}>
                         <button
                             className={styles.modalButtons}
-                            onClick={() => props.closeModal()}
+                            onClick={() => props.closeModal('swap')}
                             type='button'
                         >
                             Close
                         </button>
                         <button
                             className={styles.modalButtons}
-                            onClick={() => props.closeModal()}
+                            onClick={() => props.closeModal('swap')}
                             type='button'
                         >
                             Swap

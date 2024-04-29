@@ -27,7 +27,7 @@ export default function HomeTopCards() {
                         height={20}
                         alt='wrench icon'
                     />
-                    <h2 className={styles.cardNumber}>3</h2>
+                    <h2 className={styles.cardNumber}>5</h2>
                     <p className={styles.cardSubtitle}>Needs Repair</p>
                 </div>
                 <div className={styles.percentBox}>
@@ -48,7 +48,7 @@ export default function HomeTopCards() {
             <div className={styles.card}>
                 {/* <LuCalendarClock /> */}
                 <Image src={cal} width={20} height={20} alt='calendar icon' />
-                <h2 className={styles.cardNumber}>4/2/2024</h2>
+                <h2 className={styles.cardNumber}>8/2/2024</h2>
                 <p className={styles.cardSubtitle}>Next Repair Date</p>
             </div>
         </div>
