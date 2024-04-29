@@ -23,6 +23,7 @@ import EditEquipmentModal from '../Components/editequipmentmodal';
 import DeleteEquipmentModal from '../Components/deleteequipmentmodal';
 import Sidebar from '../Components/sidebar';
 import HeaderBar from '../Components/header';
+import { IoMdAdd } from 'react-icons/io';
 
 export default function Equipment() {
     const [data, setData] = useState(null); // Initial data from backend
@@ -257,9 +258,8 @@ export default function Equipment() {
                                 onClick={() => openModal('add')}
                                 // onClick={handleAddEquipment}
                             >
-                                {/* <MdAddCircle size={20} /> */}
-                                <IoIosAddCircleOutline size={20} />
-                                Add Equipment
+                                <IoMdAdd size={20} />
+                                Add
                             </button>
                             {/* {showAddEquipmentModal && (
                             <AddEquipmentModal closeModal={handleCloseModal} />
@@ -274,7 +274,7 @@ export default function Equipment() {
                                     <input
                                         type='reset'
                                         value='Clear selection'
-                                        className={styles.tableBarChild}
+                                        className={styles.clearBtn}
                                         onClick={handleReset}
                                     />
                                     <label htmlFor='locations'></label>

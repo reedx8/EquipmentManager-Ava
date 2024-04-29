@@ -5,7 +5,15 @@
         'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
         'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
 
+    /* color palette */
+    --dark: #222831;
+    --ltdark: #393e46;
+    --orange: #f96d00;
+    --altWhite: #f2f2f2;
     --grey: #f0f0f0;
+    --blueBtn: #2196f3;
+    --redBtn: #ff1744;
+    --greenBtn: #4caf50;
 }
 
 * {

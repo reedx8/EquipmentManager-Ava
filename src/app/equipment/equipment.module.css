@@ -64,7 +64,18 @@ Enter in your css below:
     margin-bottom: 0.5rem;
 }
 
-.tableBarChild {
+.clearBtn {
+    /* background-color: lightcoral; */
+    background-color: var(--redBtn);
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.tableBarChild,
+.clearBtn {
     margin-left: 0.5rem;
     padding: 0.3rem;
 }
@@ -94,31 +105,44 @@ Enter in your css below:
     gap: 0.5rem;
     /* flex-direction: row; */
 }
-
-.swapBtn {
-    background-color: orange;
+.swapBtn,
+.addEquipBtn {
     padding: 0.4rem;
-    border: none;
     cursor: pointer;
     border-radius: 0.5rem;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    width: 8.5rem;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    width: 7rem;
+    font-weight: 500;
+}
+
+.swapBtn {
+    background-color: transparent;
+    border: 1px solid var(--ltdark);
+    color: bar(--ltdark);
+}
+.swapBtn:hover {
+    background-color: var(--ltdark);
+    color: white;
+    /* add shadow to button on hover */
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.7);
+    transition: all 0.4s;
 }
 
 .addEquipBtn {
-    background-color: lightblue;
-    /* background: none; */
-    padding: 0.4rem;
+    background-color: var(--blueBtn);
+    /* background-color: #4caf50; */
+    color: white;
     border: none;
-    cursor: pointer;
-    border-radius: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 8.5rem;
-    /* font: inherit; */
+}
+.addEquipBtn:hover {
+    /* background-color: #388e3c; */
+    background-color: #1e88e5;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.7);
+    transition: all 0.4s;
 }
 
 /*
@@ -139,7 +163,6 @@ Enter in your css below:
 .editBtn:hover,
 .deleteBtn:hover {
     color: black;
-    cursor: pointer;
 }
 
 .modal {
