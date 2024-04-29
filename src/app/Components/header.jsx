@@ -40,14 +40,14 @@ export default function HeaderBar() {
     return (
         <div className={styles.main}>
             {/* <p>Equipment Manager</p> */}
-            <Link href='/'>
+            {/* <Link href='/'>
                 <Image
                     src={title2}
                     alt='Equipment Manager'
                     height={40}
                     width={230}
                 />
-            </Link>
+            </Link> */}
 
             <Link href='/'>
                 <Image

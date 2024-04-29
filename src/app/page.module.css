@@ -5,13 +5,15 @@ layout.js styles:
     /* margin-left: 80px; */
     background-color: var(--grey);
     min-height: 100%;
+    /* width: 90%; */
 }
 
 /* 
 page.js styles:
 */
 .pageContent {
-    margin-left: 80px;
+    margin-left: 150px;
+    /* margin-left: 80px; */
 }
 
 .pageContent > section {

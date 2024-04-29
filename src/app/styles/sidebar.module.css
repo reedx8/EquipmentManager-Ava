@@ -3,8 +3,9 @@
 
     display: flex;
     flex-direction: column;
-    width: 80px;
-    height: 100vh;
+    width: auto;
+    /* width: 80px; */
+    height: 100%;
     /* padding: 1rem; */
     justify-content: space-between;
     align-items: center;
@@ -15,21 +16,58 @@
     /* for testing: */
     /* background-color: red; */
 }
+.logoContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1.5rem 0;
+}
+.sidebarLink,
+.activeLink {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 0.3rem;
+    /* color: lightgrey; */
+    padding: 0.3rem 0.3rem;
+    margin: 0.5rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.sidebarLink {
+    color: lightgrey;
+}
+.activeLink {
+    /* color: var(--orange); */
+    color: white;
+    background-color: var(--ltdark);
+    /* background-color: var(--orange); */
+    border-radius: 15px;
+    opacity: 0.9;
+}
+.sidebarLink:hover {
+    background-color: var(--ltdark);
+    /* background-color: var(--orange); */
+    /* opacity: 0.9; */
+    border-radius: 15px;
+    transition: background-color 0.3s ease;
+    /* color: grey; */
+}
 
 .sidebarIcon {
     /* size only works as attribute */
-    /* background-color: lightgreen; */
-    background-color: var(--ltdark);
-    /* background-color: #f96d00; */
-    padding: 5px;
-    color: var(--altWhite);
+    /* background-color: var(--ltdark); */
+    padding: 4px;
+    /* padding: 5px; */
     border-radius: 5px;
-    margin: 1rem;
+    color: var(--altWhite);
+    /* color: lightgrey; */
 }
 
 .sidebarIcon:hover {
     /* background-color: white; */
-    color: grey;
+    /* color: grey; */
     /* color: lightgreen; */
     /* border: 1px solid lightgreen; */
 }
@@ -46,8 +84,10 @@
 
 .sidebarLine {
     height: 1px;
-    border: 0;
+    /* border: 0; */
     padding: 0;
+    margin: 0 10px;
+    opacity: 0.7;
     /* border-top: 1px solid var(--grey); */
     border-top: 1px solid var(--orange);
 }

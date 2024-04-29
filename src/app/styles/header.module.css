@@ -1,14 +1,11 @@
 .main {
-    margin-left: 80px;
+    margin-left: 150px;
+    /* margin-left: 80px; */
 
     display: flex;
-    justify-content: space-between;
-    /* color: white; */
+    justify-content: flex-end;
+    /* justify-content: space-between; */
     font-size: 15px;
     font-weight: 500;
     padding: 1rem;
-    /* background-color: #171717; */
-
-    /* for testing: */
-    /* background-color: blue;  */
 }
