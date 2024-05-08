@@ -22,8 +22,7 @@ export async function middleware(req) {
                 },
                 set(name, value, options) {
                     req.cookies.set({
-                        na,
-                        e,
+                        name,
                         value,
                         ...options,
                     });
