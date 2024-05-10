@@ -1,0 +1,51 @@
+/* 
+Do not alter or delete:
+*/
+.pageContent {
+    margin-left: 150px;
+}
+
+.pageContent > section {
+    margin: 0 1rem 1rem 0;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.search {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    color: var(--dark);
+    /* background-color: white; */
+    padding: 0.2rem;
+    /* border-radius: 5px; */
+}
+
+.searchInput {
+    padding: 0.7rem 0 0.7rem 0.2rem;
+    border: none;
+    background: none;
+    outline: none;
+    color: grey;
+    font-size: 1rem;
+}
+.searchInput::placeholder {
+    color: grey;
+    font-size: 1rem;
+    /* color: var(--grey); */
+}
+.viewOptions {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+    color: var(--dark);
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}

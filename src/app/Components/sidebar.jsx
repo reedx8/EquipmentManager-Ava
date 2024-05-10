@@ -14,6 +14,7 @@ import { BsWrenchAdjustableCircle } from 'react-icons/bs';
 import { CiCalendarDate } from 'react-icons/ci';
 import { BiSolidDashboard } from 'react-icons/bi';
 import logo from '/public/logo.png';
+import { IoPerson } from 'react-icons/io5';
 
 // Sidebar for all pages except login
 export default function Sidebar() {
@@ -34,6 +35,7 @@ export default function Sidebar() {
                             width={120}
                             height={'auto'}
                             alt='Logo'
+                            priority={true}
                         />
                     </Link>
                 </div>
@@ -117,6 +119,19 @@ export default function Sidebar() {
                             className={styles.sidebarIcon}
                             size={35}
                         /> */}
+                    </Link>
+                </div>
+                <div>
+                    <Link
+                        href='/providers'
+                        className={
+                            currentRoute === '/providers'
+                                ? styles.activeLink
+                                : styles.sidebarLink
+                        }
+                    >
+                        <IoPerson className={styles.sidebarIcon} size={35} />
+                        <p>Providers</p>
                     </Link>
                 </div>
             </div>

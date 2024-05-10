@@ -6,8 +6,8 @@ import './globals.css';
 const customFont = Archivo({ subsets: ['latin'] });
 
 export const metadata = {
-    title: 'Equipment Manager',
-    description: 'Equipment Manager web app, AVA Roasteria',
+    title: 'EQUIP',
+    description: 'Equipment Manager for Ava Roasteria',
 };
 
 // Rootlayout is the top level layout component for the app (children = pages/components)

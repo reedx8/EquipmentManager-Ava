@@ -1,0 +1,95 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    min-width: 270px;
+    height: auto;
+    border-top: 5px solid var(--orange);
+}
+
+.card:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+    transition: all 0.5s ease;
+    /* cursor: pointer; */
+    /* transform instead by scale */
+    /* transform: scale(1.01); */
+}
+
+.cardHeader {
+    display: flex;
+    gap: 1rem;
+}
+.avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    /* object-fit: cover; */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    /* prevent user from dragging image */
+    pointer-events: none;
+    margin-bottom: 0.5rem;
+}
+.titleText > h1 {
+    font-size: 1.2rem;
+    color: black;
+    font-weight: 400;
+    user-select: none;
+}
+.titleText > p {
+    letter-spacing: 0.5px;
+    user-select: none;
+}
+
+.titleText > h1,
+.titleText > p,
+.cardBodyInfo {
+    /* append ellipsis when text is too long */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 160px;
+}
+
+.contactLinks {
+    display: flex;
+    gap: 0.8rem;
+    margin: 0.3rem 0;
+}
+.cardBody {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+}
+.cardBodyRow {
+    display: grid;
+    grid-template-columns: 77px auto;
+}
+.cardBodyTitle {
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.cardBodyTitle,
+.titleText > p {
+    font-weight: 300;
+    font-size: 0.8rem;
+    color: grey;
+}
+
+/* .cardBodyTitle {
+    color: grey;
+}
+.titleText > p {
+    color: var(--orange);
+} */
