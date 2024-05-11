@@ -42,10 +42,14 @@ Do not alter or delete:
     gap: 0.5rem;
     font-size: 1.2rem;
     color: var(--dark);
+    /* background-color: white; */
+    /* padding: 0.2rem; */
+    /* border-radius: 5px; */
 }
 
-.cards {
+.cardSection {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+    /* justify-content: center; */
 }

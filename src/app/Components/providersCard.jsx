@@ -79,7 +79,7 @@ export default function ProvidersCard({ info }) {
                         Phone
                     </p>
                     <p className={styles.cardBodyInfo}>
-                        {info.phone ? info.phone : '--'}
+                        {info.phone_number ? info.phone_number : '--'}
                     </p>
                 </div>
                 <div className={styles.cardBodyRow}>

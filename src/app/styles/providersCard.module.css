@@ -38,10 +38,14 @@
     margin-bottom: 0.5rem;
 }
 .titleText > h1 {
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: black;
     font-weight: 400;
     user-select: none;
+}
+.titleText > h1:hover {
+    white-space: normal;
+    overflow: visible;
 }
 .titleText > p {
     letter-spacing: 0.5px;
@@ -85,6 +89,11 @@
     font-weight: 300;
     font-size: 0.8rem;
     color: grey;
+}
+
+.cardBodyInfo:hover {
+    white-space: normal;
+    overflow: visible;
 }
 
 /* .cardBodyTitle {

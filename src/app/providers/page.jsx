@@ -1,5 +1,6 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import supabase from '../config/supabaseClient';
 import Sidebar from '../Components/sidebar';
 import HeaderBar from '../Components/header';
 import styles from './providers.module.css';
@@ -14,7 +15,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const info = [
     {
         name: 'Doordash', // <= 19 characters
-        purpose: 'Mobile App Delivery', // <= 25 characters
+        purpose: 'Food Delivery App', // <= 25 characters
         phone: '(855) 431-0459',
         email: null,
         website_url: 'https://www.doordash.com',
@@ -26,7 +27,7 @@ const info = [
     },
     {
         name: 'Uber Eats',
-        purpose: 'Mobile App Delivery',
+        purpose: 'Food Delivery App',
         phone: '1 (833) 275-3287',
         email: 'restaurants@uber.com',
         website_url: 'https://www.ubereats.com',
@@ -39,7 +40,7 @@ const info = [
     },
     {
         name: 'Grubhub',
-        purpose: 'Mobile App Delivery',
+        purpose: 'Food Delivery App',
         phone: '(877) 799-0790',
         email: 'restaurants@grubhub.com',
         website_url: 'https://www.grubhub.com',
@@ -108,22 +109,56 @@ const info = [
 ];
 
 export default function Providers() {
-    const [filteredProviders, setFilteredProviders] = useState(info);
+    const [providers, setProviders] = useState([]); // Initial fetch data to reset filteredProviders to when search input is empty (avoids having to refetch data)
+    const [filteredProviders, setFilteredProviders] = useState([]); // Data to be displayed on the page
+    const [fetchError, setFetchError] = useState(null);
+
+    useEffect(() => {
+        fetchProviders();
+    }, []);
+
+    const fetchProviders = async () => {
+        try {
+            const { data, error } = await supabase
+                .from('Providers')
+                .select(
+                    'name, purpose, phone_number, email, website_url, menu_url, support_url, gmaps_link, avatar_url'
+                );
+            if (error) {
+                setProviders([]);
+                setFilteredProviders([]);
+                setFetchError(error);
+                throw error;
+                // console.log('error', error);
+            }
+            if (data) {
+                data.sort((a, b) => a.name.localeCompare(b.name));
+                setProviders(data);
+                setFilteredProviders(data);
+                setFetchError(null);
+                // console.log('data', data);
+            }
+        } catch (error) {
+            console.log('error: ', error);
+        }
+    };
 
     const handleSearch = (e) => {
-        /* what whill filteredProviders have when filter doesnt find anything? */
-
-        setFilteredProviders(
-            info.filter(
+        if (e.target.value === '') {
+            setFilteredProviders(providers); // Reset filteredProviders to initial data
+            return;
+        }
+        if (providers.length > 0) {
+            let searchTerm = e.target.value.toLowerCase();
+            let filteredData = providers.filter(
                 (info) =>
-                    info.name
-                        .toLowerCase()
-                        .includes(e.target.value.toLowerCase()) ||
-                    info.purpose
-                        .toLowerCase()
-                        .includes(e.target.value.toLowerCase())
-            )
-        );
+                    info.name.toLowerCase().includes(searchTerm) ||
+                    (info.purpose &&
+                        info.purpose.toLowerCase().includes(searchTerm))
+            );
+            setFilteredProviders(filteredData);
+            // console.log('filteredData', filteredData);
+        }
     };
 
     return (
@@ -143,12 +178,13 @@ export default function Providers() {
                     </div>
                     <div className={styles.viewOptions}>
                         {/* <CiViewTable /> */}
-                        <FiMenu />
                         <IoGrid />
+                        <FiMenu />
                     </div>
                 </section>
-                <section className={styles.cards}>
-                    {filteredProviders.length === 0 ? (
+                <section className={styles.cardSection}>
+                    {filteredProviders.length === 0 &&
+                    providers.length !== 0 ? (
                         <AnimatePresence>
                             <motion.div
                                 initial={{ opacity: 0 }}
