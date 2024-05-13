@@ -24,6 +24,7 @@ import DeleteEquipmentModal from '../Components/deleteequipmentmodal';
 import Sidebar from '../Components/sidebar';
 import HeaderBar from '../Components/header';
 import { IoMdAdd } from 'react-icons/io';
+import globalTableTheme from '../config/theme';
 
 export default function Equipment() {
     const [data, setData] = useState(null); // Initial data from backend
@@ -31,13 +32,13 @@ export default function Equipment() {
     const [filtered, setFiltered] = useState(null); // tables data after search and location input
     const [location, setLocation] = useState(''); // store name, ie location, from drop down menu
     const [search, setSearch] = useState(''); // search field input
-    const theme = useTheme(getTheme());
     const [showAddEquipmentModal, setShowAddEquipmentModal] = useState(false);
     const [showSwapModal, setShowSwapModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [currentItemDetails, setCurrentItemDetails] = useState(null);
     // const [loading, setLoading] = useState(true);
+    const theme = useTheme(globalTableTheme);
 
     const pagination = usePagination(data, {
         state: {
