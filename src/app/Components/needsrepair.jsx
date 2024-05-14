@@ -73,9 +73,11 @@ export default function NeedsRepair() {
                             <>
                                 <Header>
                                     <HeaderRow>
-                                        <HeaderCell>Store Name</HeaderCell>
-                                        <HeaderCell>Repair Date</HeaderCell>
-                                        <HeaderCell>Name</HeaderCell>
+                                        <HeaderCell>Store</HeaderCell>
+                                        <HeaderCell>
+                                            Next Repair Date
+                                        </HeaderCell>
+                                        <HeaderCell>Item</HeaderCell>
                                         <HeaderCell>Reason</HeaderCell>
                                     </HeaderRow>
                                 </Header>
@@ -86,11 +88,16 @@ export default function NeedsRepair() {
                                             {/* <Cell>{"1/1/2020"}</Cell> */}
                                             {/* <Cell>{item.Next_Repair_Date}</Cell> */}
                                             <Cell>
-                                                {new Date(
-                                                    item.Next_Repair_Date
-                                                ).toLocaleDateString('en-US', {
-                                                    timezone: 'PST',
-                                                })}
+                                                {item.Next_Repair_Date
+                                                    ? new Date(
+                                                          item.Next_Repair_Date
+                                                      ).toLocaleDateString(
+                                                          'en-US',
+                                                          {
+                                                              timezone: 'PST',
+                                                          }
+                                                      )
+                                                    : ''}
                                             </Cell>
                                             <Cell>{item.Name}</Cell>
                                             <Cell>{item.Reason}</Cell>

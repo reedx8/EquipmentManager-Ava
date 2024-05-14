@@ -23,12 +23,12 @@ export default function EditEquipmentModal({
     //     itemDetails.Next_Repair_Date
     // );
     const [totalCost, setTotalCost] = useState(itemDetails.Total_Cost);
-    const [numOfRepairs, setNumOfRepairs] = useState(
-        itemDetails.Num_of_Repairs
-    );
+    // const [numOfRepairs, setNumOfRepairs] = useState(
+    // itemDetails.Num_of_Repairs
+    // );
     const [status, setStatus] = useState(itemDetails.Status_id);
 
-    console.log('itemDetails: ' + equipmentName);
+    // console.log('itemDetails: ' + equipmentName);
 
     useEffect(() => {
         setEquipmentId(itemDetails.id);
@@ -39,7 +39,7 @@ export default function EditEquipmentModal({
         setComments(itemDetails.Comments);
         setPurchaseDate(itemDetails.Purchase_Date);
         setTotalCost(itemDetails.Total_Cost);
-        setNumOfRepairs(itemDetails.Num_of_Repairs);
+        // setNumOfRepairs(itemDetails.Num_of_Repairs);
         setStatus(itemDetails.Status_id);
     }, [itemDetails]);
 
@@ -59,7 +59,7 @@ export default function EditEquipmentModal({
                 // Reason: reason,
                 // Next_Repair_Date: nextRepairDate,
                 Total_Cost: totalCost,
-                Num_of_Repairs: numOfRepairs,
+                // Num_of_Repairs: numOfRepairs,
                 Status_id: status,
             })
             .match({ id: equipmentId });
@@ -142,6 +142,8 @@ export default function EditEquipmentModal({
                             <option value='Barrows'>Barrows</option>
                             <option value='Orenco'>Orenco</option>
                             <option value='Kruse'>Kruse</option>
+                            <option value='Bakery'>Bakery</option>
+                            <option value='Office'>Office</option>
                         </select>
                     </div>
                     <div>
@@ -169,19 +171,19 @@ export default function EditEquipmentModal({
                         <select
                             id='status'
                             name='status'
-                            value={status || ''}
+                            value={status}
                             onChange={(e) => setStatus(e.target.value)}
                         >
-                            <option value='1'>In Use</option>
-                            <option value='2'>In Storage</option>
-                            <option value='3'>Under Maintenance</option>
-                            <option value='4'>Being Repaired</option>
-                            <option value='5'>Decommissioned</option>
-                            <option value='6'>For Sale</option>
-                            <option value='7'>Lost</option>
-                            <option value='8'>Stolen</option>
-                            <option value='9'>Needs Repair</option>
-                            <option value='10'>Awaiting Reassignment</option>
+                            <option value={1}>On Floor</option>
+                            <option value={2}>In Storage</option>
+                            <option value={3}>Under Maintenance</option>
+                            <option value={4}>Being Repaired</option>
+                            <option value={5}>Decommissioned</option>
+                            <option value={6}>For Sale</option>
+                            <option value={7}>Lost</option>
+                            <option value={8}>Stolen</option>
+                            <option value={9}>Needs Repair</option>
+                            <option value={10}>Awaiting Reassignment</option>
                         </select>
                     </div>
                     <div>
@@ -211,7 +213,7 @@ export default function EditEquipmentModal({
                             onChange={(e) => setTotalCost(e.target.value)}
                         />
                     </div>
-                    <div>
+                    {/* <div>
                         <label
                             htmlFor='numOfRepairs'
                             className={styles.rowName}
@@ -219,15 +221,7 @@ export default function EditEquipmentModal({
                             Number of Repairs:{' '}
                         </label>
                         <p>{numOfRepairs || ''}</p>
-                        {/* <p>hello</p> */}
-                        {/* <input
-                            id='numOfRepairs'
-                            type='number'
-                            name='numOfRepairs'
-                            value={itemDetails.Num_of_Repairs}
-                            onChange={(e) => setNumOfRepairs(e.target.value)}
-                        /> */}
-                    </div>
+                    </div> */}
                     <div>
                         <label htmlFor='comments'>Comments</label>
                         <div>

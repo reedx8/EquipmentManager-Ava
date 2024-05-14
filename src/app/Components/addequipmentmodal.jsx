@@ -11,6 +11,7 @@ export default function AddEquipmentModal(props) {
     const [equipmentType, setEquipmentType] = useState('Tablet'); // First option in select
     const [storeLocation, setStoreLocation] = useState('Hall');
     const [provider, setProvider] = useState('Ava Roasteria');
+    const [status, setStatus] = useState('On Floor');
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -26,6 +27,7 @@ export default function AddEquipmentModal(props) {
                 Name: equipmentName,
                 Equip_Type: equipmentType,
                 Store_Name: storeLocation,
+                Status_id: status,
                 Provider_Name: provider,
             },
         ]);
@@ -54,6 +56,7 @@ export default function AddEquipmentModal(props) {
                             name='equipmentName'
                             value={equipmentName}
                             onChange={(e) => setEquipmentName(e.target.value)}
+                            required
                         />
                     </div>
                     <div>
@@ -90,6 +93,29 @@ export default function AddEquipmentModal(props) {
                             <option value='Barrows'>Barrows</option>
                             <option value='Orenco'>Orenco</option>
                             <option value='Kruse'>Kruse</option>
+                            <option value='Bakery'>Bakery</option>
+                            <option value='Office'>Office</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label htmlFor='status'>Status</label>
+                        <select
+                            id='status'
+                            name='status'
+                            value={status}
+                            onChange={(e) => setStatus(e.target.value)}
+                        >
+                            <option value={1}>On Floor</option>
+                            <option value={2}>In Storage</option>
+                            {/* // create options for following: Under Maintenance, Being Repaired, Decommissioned, For Sale, Lost, Stolen, Needs Repair, Awaiting Reassignment */}
+                            <option value={3}>Under Maintenance</option>
+                            <option value={4}>Being Repaired</option>
+                            <option value={5}>Decommissioned</option>
+                            <option value={6}>For Sale</option>
+                            <option value={7}>Lost</option>
+                            <option value={8}>Stolen</option>
+                            <option value={9}>Needs Repair</option>
+                            <option value={10}>Awaiting Reassignment</option>
                         </select>
                     </div>
                     <div>

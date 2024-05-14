@@ -158,7 +158,7 @@ export default function Equipment() {
     async function fetchAllEquipment() {
         const { data, error } = await supabase
             .from('Equipment')
-            .select('id, Name, Store_Name, Total_Cost, Provider_Name');
+            .select('id, Name, Store_Name, Status_id, Provider_Name');
 
         if (error) {
             setData(null);
@@ -340,9 +340,7 @@ export default function Equipment() {
                                                 <HeaderCell>
                                                     Location
                                                 </HeaderCell>
-                                                <HeaderCell>
-                                                    Total Cost
-                                                </HeaderCell>
+                                                <HeaderCell>Status</HeaderCell>
                                                 <HeaderCell>
                                                     Provider
                                                 </HeaderCell>
@@ -357,7 +355,9 @@ export default function Equipment() {
                                                         {item.Store_Name}
                                                     </Cell>
                                                     <Cell>
-                                                        ${item.Total_Cost}
+                                                        {getStatus(
+                                                            item.Status_id
+                                                        )}
                                                     </Cell>
                                                     <Cell>
                                                         {item.Provider_Name}
@@ -454,3 +454,30 @@ export default function Equipment() {
         </>
     );
 }
+
+const getStatus = (status) => {
+    switch (status) {
+        case 1:
+            return 'On Floor';
+        case 2:
+            return 'In Storage';
+        case 3:
+            return 'Under Maintenance';
+        case 4:
+            return 'Being Repaired';
+        case 5:
+            return 'Decommissioned';
+        case 6:
+            return 'For Sale';
+        case 7:
+            return 'Lost';
+        case 8:
+            return 'Stolen';
+        case 9:
+            return 'Needs Repair';
+        case 10:
+            return 'Awaiting Reassignment';
+        default:
+            return 'Unknown';
+    }
+};
