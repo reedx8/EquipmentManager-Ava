@@ -25,6 +25,7 @@ import Sidebar from '../Components/sidebar';
 import HeaderBar from '../Components/header';
 import { IoMdAdd } from 'react-icons/io';
 import globalTableTheme from '../config/theme';
+import { fetchStores } from '../utils/fetchData';
 
 export default function Equipment() {
     const [data, setData] = useState(null); // Initial data from backend
@@ -37,6 +38,7 @@ export default function Equipment() {
     const [showEditModal, setShowEditModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [currentItemDetails, setCurrentItemDetails] = useState(null);
+    const [stores, setStores] = useState([]);
     // const [loading, setLoading] = useState(true);
     const theme = useTheme(globalTableTheme);
 
@@ -178,6 +180,15 @@ export default function Equipment() {
     // fetch all equipment from backend on first mount only
     useEffect(() => {
         fetchAllEquipment();
+        const fetchAllStores = async () => {
+            try {
+                const stores = await fetchStores();
+                setStores(stores);
+            } catch (error) {
+                console.log('Error fetching stores: ' + error.message);
+            }
+        };
+        fetchAllStores();
     }, []);
 
     // Update table data with location and/or search field input
@@ -294,24 +305,15 @@ export default function Equipment() {
                                         >
                                             Select location...
                                         </option>
-                                        <optgroup label='Stores'>
-                                            <option value='hall'>Hall</option>
-                                            <option value='barrows'>
-                                                Barrows
-                                            </option>
-                                            <option value='kruse'>Kruse</option>
-                                            <option value='orenco'>
-                                                Orenco
-                                            </option>
-                                        </optgroup>
-                                        <optgroup label='Other locations'>
-                                            <option value='bakery'>
-                                                Bakery
-                                            </option>
-                                            <option value='office'>
-                                                Office
-                                            </option>
-                                        </optgroup>
+                                        {stores &&
+                                            stores.map((store, index) => (
+                                                <option
+                                                    key={index}
+                                                    value={store.Name}
+                                                >
+                                                    {store.Name}
+                                                </option>
+                                            ))}
                                     </select>
                                 </form>
 

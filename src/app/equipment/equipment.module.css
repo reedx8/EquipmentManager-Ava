@@ -165,6 +165,7 @@ Enter in your css below:
     color: black;
 }
 
+/* Modal */
 .modal {
     display: flex;
     justify-content: center;
@@ -215,7 +216,6 @@ Enter in your css below:
     cursor: pointer;
 }
 
-/* sdkljaf */
 .rowName {
     margin-right: 10px;
 }

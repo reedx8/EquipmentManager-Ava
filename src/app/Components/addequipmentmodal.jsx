@@ -4,23 +4,81 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import styles from '../equipment/equipment.module.css';
 import supabase from '../config/supabaseClient';
+import {
+    fetchStores,
+    fetchStatuses,
+    fetchEquipTypes,
+    fetchProviders,
+} from '../utils/fetchData';
 
-// Adds equipment to the 'equipment' table in database
+// export const revalidate = 86400;
+
+// Adds equipment to the 'Equipment' table in database
 export default function AddEquipmentModal(props) {
+    // Default values for form fields:
     const [equipmentName, setEquipmentName] = useState('');
     const [equipmentType, setEquipmentType] = useState('Tablet'); // First option in select
     const [storeLocation, setStoreLocation] = useState('Hall');
     const [provider, setProvider] = useState('Ava Roasteria');
-    const [status, setStatus] = useState('On Floor');
+    const [status, setStatus] = useState(1);
+    // Options fetched from database:
+    const [statuses, setStatuses] = useState([]);
+    const [stores, setStores] = useState([]);
+    const [equipTypes, setEquipTypes] = useState([]);
+    const [providers, setProviders] = useState([]);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const loadData = async () => {
+            try {
+                const stores = await fetchStores();
+                setStores(stores);
+                const statuses = await fetchStatuses();
+                setStatuses(statuses);
+                const equipTypes = await fetchEquipTypes();
+                setEquipTypes(equipTypes);
+                const providers = await fetchProviders();
+                setProviders(providers);
+            } catch (error) {
+                setError(error);
+            }
+        };
+        loadData();
+
+        /*
+        const fetchStatuses = async () => {
+            try {
+                const response = await fetch('/api/statuses');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch statuses');
+                }
+                const data = await response.json();
+                setStatuses(data);
+                // console.log('Statuses: ', data);
+            } catch (error) {
+                setStatusesError(error);
+            }
+        };
+        const fetchStores = async () => {
+            try {
+                const response = await fetch('/api/stores');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch stores');
+                }
+                const data = await response.json();
+                setStores(data);
+            } catch (error) {
+                setStoresError(error);
+            }
+        };
+
+        fetchStatuses();
+        fetchStores();
+        */
+    }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        /*
-        alert(
-            `Name: ${equipmentName}, Type: ${equipmentType}, Location: ${storeLocation}, Provider: ${provider}`
-        );
-        */
 
         const { data, error } = await supabase.from('Equipment').insert([
             {
@@ -67,7 +125,12 @@ export default function AddEquipmentModal(props) {
                             value={equipmentType}
                             onChange={(e) => setEquipmentType(e.target.value)}
                         >
-                            <option value='Tablet'>Tablet</option>
+                            {equipTypes.map((equipType, index) => (
+                                <option key={index} value={equipType.Name}>
+                                    {equipType.Name}
+                                </option>
+                            ))}
+                            {/* <option value='Tablet'>Tablet</option>
                             <option value='Computer'>Computer</option>
                             <option value='Printer'>Printer</option>
                             <option value='Network Device'>
@@ -78,7 +141,7 @@ export default function AddEquipmentModal(props) {
                             <option value='Espresso Machine'>
                                 Espresso Machine
                             </option>
-                            <option value='Microwave'>Microwave</option>
+                            <option value='Microwave'>Microwave</option> */}
                         </select>
                     </div>
                     <div>
@@ -89,12 +152,11 @@ export default function AddEquipmentModal(props) {
                             value={storeLocation}
                             onChange={(e) => setStoreLocation(e.target.value)}
                         >
-                            <option value='Hall'>Hall</option>
-                            <option value='Barrows'>Barrows</option>
-                            <option value='Orenco'>Orenco</option>
-                            <option value='Kruse'>Kruse</option>
-                            <option value='Bakery'>Bakery</option>
-                            <option value='Office'>Office</option>
+                            {stores.map((store, index) => (
+                                <option key={index} value={store.Name}>
+                                    {store.Name}
+                                </option>
+                            ))}
                         </select>
                     </div>
                     <div>
@@ -105,17 +167,11 @@ export default function AddEquipmentModal(props) {
                             value={status}
                             onChange={(e) => setStatus(e.target.value)}
                         >
-                            <option value={1}>On Floor</option>
-                            <option value={2}>In Storage</option>
-                            {/* // create options for following: Under Maintenance, Being Repaired, Decommissioned, For Sale, Lost, Stolen, Needs Repair, Awaiting Reassignment */}
-                            <option value={3}>Under Maintenance</option>
-                            <option value={4}>Being Repaired</option>
-                            <option value={5}>Decommissioned</option>
-                            <option value={6}>For Sale</option>
-                            <option value={7}>Lost</option>
-                            <option value={8}>Stolen</option>
-                            <option value={9}>Needs Repair</option>
-                            <option value={10}>Awaiting Reassignment</option>
+                            {statuses.map((status) => (
+                                <option key={status.id} value={status.id}>
+                                    {status.Status}
+                                </option>
+                            ))}
                         </select>
                     </div>
                     <div>
@@ -126,12 +182,17 @@ export default function AddEquipmentModal(props) {
                             value={provider}
                             onChange={(e) => setProvider(e.target.value)}
                         >
-                            <option value='Ava Roasteria'>Ava Roasteria</option>
+                            {providers.map((provider, index) => (
+                                <option key={index} value={provider.name}>
+                                    {provider.name}
+                                </option>
+                            ))}
+                            {/* <option value='Ava Roasteria'>Ava Roasteria</option>
                             <option value='Grubhub'>Grubhub</option>
                             <option value='Doordash'>DoorDash</option>
                             <option value='Uber Eats'>Uber Eats</option>
                             <option value='Comcast'>Comcast</option>
-                            <option value='Revel'>Revel</option>
+                            <option value='Revel'>Revel</option> */}
                         </select>
                     </div>
                     <div className={styles.buttonsRow}>
