@@ -1,10 +1,62 @@
 /* Do not alter or delete: */
 .pageContent {
     margin-left: 130px;
+    height: 100%;
 }
 
 .pageContent > section {
-    margin: 2rem;
+    margin: 1rem 2rem;
 }
 
 /* Enter in your css below: */
+
+.manageEventSection {
+    display: flex;
+    justify-content: flex-end;
+    /* gap: 1rem; */
+}
+
+.calendarSection,
+.skeletonSection {
+    height: 70vh;
+}
+
+.addEventButton,
+.deleteEventButton {
+    padding: 0.4rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    width: 7rem;
+    font-weight: 500;
+}
+
+.addEventButton {
+    background-color: var(--blueBtn);
+    /* background-color: #4caf50; */
+    color: white;
+    border: none;
+}
+.addEventButton:hover {
+    /* background-color: #388e3c; */
+    background-color: #1e88e5;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.7);
+    transition: all 0.4s;
+}
+
+.deleteEventButton {
+    border: 2px solid var(--redBtn);
+    /* remove default button styling */
+    background-color: transparent;
+    color: var(--redBtn);
+}
+
+.deleteEventButton:hover {
+    background-color: var(--redBtn);
+    color: white;
+    transition: all 0.4s;
+}

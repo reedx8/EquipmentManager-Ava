@@ -15,17 +15,10 @@ export default function EditEquipmentModal({
     const [equipmentType, setEquipmentType] = useState(itemDetails.Equip_Type);
     const [storeLocation, setStoreLocation] = useState(itemDetails.Store_Name);
     const [provider, setProvider] = useState(itemDetails.Provider_Name);
-    // const [lastRepair, setLastRepair] = useState(itemDetails.Last_Repair);
     const [comments, setComments] = useState(itemDetails.Comments);
     const [purchaseDate, setPurchaseDate] = useState(itemDetails.Purchase_Date);
     // const [reason, setReason] = useState(itemDetails.Reason);
-    // const [nextRepairDate, setNextRepairDate] = useState(
-    //     itemDetails.Next_Repair_Date
-    // );
     const [totalCost, setTotalCost] = useState(itemDetails.Total_Cost);
-    // const [numOfRepairs, setNumOfRepairs] = useState(
-    // itemDetails.Num_of_Repairs
-    // );
     const [status, setStatus] = useState(itemDetails.Status_id);
 
     // console.log('itemDetails: ' + equipmentName);
@@ -39,7 +32,6 @@ export default function EditEquipmentModal({
         setComments(itemDetails.Comments);
         setPurchaseDate(itemDetails.Purchase_Date);
         setTotalCost(itemDetails.Total_Cost);
-        // setNumOfRepairs(itemDetails.Num_of_Repairs);
         setStatus(itemDetails.Status_id);
     }, [itemDetails]);
 
@@ -53,13 +45,10 @@ export default function EditEquipmentModal({
                 Equip_Type: equipmentType,
                 Store_Name: storeLocation,
                 Provider_Name: provider,
-                // Last_Repair: lastRepair,
                 Comments: comments,
                 Purchase_Date: purchaseDate,
                 // Reason: reason,
-                // Next_Repair_Date: nextRepairDate,
                 Total_Cost: totalCost,
-                // Num_of_Repairs: numOfRepairs,
                 Status_id: status,
             })
             .match({ id: equipmentId });

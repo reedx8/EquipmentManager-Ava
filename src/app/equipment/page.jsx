@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import React from 'react';
 import styles from './equipment.module.css';
+import dynamic from 'next/dynamic';
 import {
     Table,
     Header,
@@ -17,10 +18,24 @@ import { usePagination } from '@table-library/react-table-library/pagination';
 import { MdDelete, MdEdit, MdAddCircle } from 'react-icons/md';
 import { IoIosSwap, IoIosAddCircleOutline } from 'react-icons/io';
 import supabase from '../config/supabaseClient';
-import AddEquipmentModal from '../Components/addequipmentmodal';
-import SwapModal from '../Components/swapmodal';
-import EditEquipmentModal from '../Components/editequipmentmodal';
-import DeleteEquipmentModal from '../Components/deleteequipmentmodal';
+import CustomSpinner from '../Components/customspinner';
+const AddEquipmentModal = dynamic(
+    () => import('../Components/addequipmentmodal'),
+    {
+        loading: () => <CustomSpinner />,
+    }
+);
+const SwapModal = dynamic(() => import('../Components/swapmodal'), {
+    loading: () => <CustomSpinner />,
+});
+const EditEquipmentModal = dynamic(
+    () => import('../Components/editequipmentmodal'),
+    { loading: () => <CustomSpinner /> }
+);
+const DeleteEquipmentModal = dynamic(
+    () => import('../Components/deleteequipmentmodal'),
+    { loading: () => <CustomSpinner /> }
+);
 import Sidebar from '../Components/sidebar';
 import HeaderBar from '../Components/header';
 import { IoMdAdd } from 'react-icons/io';

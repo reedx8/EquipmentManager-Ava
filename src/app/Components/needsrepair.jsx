@@ -15,8 +15,10 @@ import {
 import { useTheme } from '@table-library/react-table-library/theme';
 import { getTheme } from '@table-library/react-table-library/baseline';
 import { usePagination } from '@table-library/react-table-library/pagination';
-import supabase from '../config/supabaseClient';
+// import supabase from '../config/supabaseClient';
 import globalTableTheme from '../config/theme';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 export default function NeedsRepair() {
     const [fetchError, setFetchError] = useState(null);
@@ -35,105 +37,103 @@ export default function NeedsRepair() {
     function onPaginationChange(action, state) {
         console.log(action, state);
     }
+    const fetchItems = async () => {
+        try {
+            // await new Promise((resolve) => setTimeout(resolve, 2000));
+            const response = await fetch('/api/needsrepair');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            setNodes(data);
+            setFetchError(null);
+        } catch (error) {
+            setFetchError('ERROR: Couldnt fetch needs repair nodes');
+            setNodes(null);
+            console.log('Fetch Error: ', fetchError);
+        }
+    };
 
     useEffect(() => {
-        const fetchItems = async () => {
-            const { data, error } = await supabase
-                .from('Equipment')
-                .select('id, Next_Repair_Date, Store_Name, Name, Reason')
-                .eq('Status_id', 9); // 9 = Needs Repair
-            // .eq('Needs_Repair', 'TRUE');
-
-            if (error) {
-                setFetchError('ERROR: Couldnt fetch needs repair nodes');
-                setNodes(null);
-                console.log('Fetch Error: ', fetchError);
-            }
-            if (data) {
-                setNodes(data);
-                setFetchError(null);
-            }
-        };
         fetchItems();
-    }, [nodes]);
+    }, []);
+    // }, [nodes]);
 
     return (
         <div className={styles.main}>
             <h1 className={styles.title}>Needs Repair</h1>
             {fetchError && <p>{fetchError}</p>}
-            {nodes && (
-                <>
-                    <Table
-                        data={tableData}
-                        theme={theme}
-                        pagination={pagination}
-                        className={styles.table}
-                    >
-                        {(allItems) => (
-                            <>
-                                <Header>
-                                    <HeaderRow>
-                                        <HeaderCell>Store</HeaderCell>
-                                        <HeaderCell>
-                                            Next Repair Date
-                                        </HeaderCell>
-                                        <HeaderCell>Item</HeaderCell>
-                                        <HeaderCell>Reason</HeaderCell>
-                                    </HeaderRow>
-                                </Header>
-                                <Body>
-                                    {allItems.map((item) => (
-                                        <Row key={item.id} item={item}>
-                                            <Cell>{item.Store_Name}</Cell>
-                                            {/* <Cell>{"1/1/2020"}</Cell> */}
-                                            {/* <Cell>{item.Next_Repair_Date}</Cell> */}
-                                            <Cell>
-                                                {item.Next_Repair_Date
-                                                    ? new Date(
-                                                          item.Next_Repair_Date
-                                                      ).toLocaleDateString(
-                                                          'en-US',
-                                                          {
-                                                              timezone: 'PST',
-                                                          }
-                                                      )
-                                                    : ''}
-                                            </Cell>
-                                            <Cell>{item.Name}</Cell>
-                                            <Cell>{item.Reason}</Cell>
-                                        </Row>
-                                    ))}
-                                </Body>
-                            </>
-                        )}
-                    </Table>
-                    <div className={styles.paginationBar}>
-                        <div>
-                            Page:{' '}
-                            {pagination.state
-                                .getPages(tableData.nodes)
-                                .map((_, index) => (
-                                    <button
-                                        className={styles.paginationButtons}
-                                        key={index}
-                                        type='button'
-                                        style={{
-                                            fontWeight:
-                                                pagination.state.page == index
-                                                    ? 'bold'
-                                                    : 'normal',
-                                        }}
-                                        onClick={() =>
-                                            pagination.fns.onSetPage(index)
-                                        }
-                                    >
-                                        {index + 1}
-                                    </button>
-                                ))}
-                        </div>
-                    </div>
-                </>
+            {!nodes && !fetchError ? (
+                <Skeleton
+                    // count={1}
+                    height={125}
+                    borderRadius={0.5}
+                />
+            ) : (
+                <NeedsRepairTable
+                    nodes={nodes}
+                    tableData={tableData}
+                    pagination={pagination}
+                    theme={theme}
+                />
             )}
         </div>
+    );
+}
+
+function NeedsRepairTable({ nodes, tableData, pagination, theme }) {
+    return (
+        <>
+            <Table
+                data={tableData}
+                theme={theme}
+                pagination={pagination}
+                className={styles.table}
+            >
+                {(allItems) => (
+                    <>
+                        <Header>
+                            <HeaderRow>
+                                <HeaderCell>Location</HeaderCell>
+                                <HeaderCell>Item</HeaderCell>
+                                <HeaderCell>Reason</HeaderCell>
+                            </HeaderRow>
+                        </Header>
+                        <Body>
+                            {allItems.map((item) => (
+                                <Row key={item.id} item={item}>
+                                    <Cell>{item.Store_Name}</Cell>
+                                    <Cell>{item.Name}</Cell>
+                                    <Cell>{item.Reason}</Cell>
+                                </Row>
+                            ))}
+                        </Body>
+                    </>
+                )}
+            </Table>
+            <div className={styles.paginationBar}>
+                <div>
+                    Page:{' '}
+                    {pagination.state
+                        .getPages(tableData.nodes)
+                        .map((_, index) => (
+                            <button
+                                className={styles.paginationButtons}
+                                key={index}
+                                type='button'
+                                style={{
+                                    fontWeight:
+                                        pagination.state.page == index
+                                            ? 'bold'
+                                            : 'normal',
+                                }}
+                                onClick={() => pagination.fns.onSetPage(index)}
+                            >
+                                {index + 1}
+                            </button>
+                        ))}
+                </div>
+            </div>
+        </>
     );
 }

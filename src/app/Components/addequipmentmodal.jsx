@@ -104,7 +104,6 @@ export default function AddEquipmentModal(props) {
                 <div>
                     <h1>Add Equipment</h1>
                 </div>
-                {/* TODO: Add form validation, and generate content from DB instead */}
                 <form className={styles.modalContents} onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor='equipmentName'>Name</label>

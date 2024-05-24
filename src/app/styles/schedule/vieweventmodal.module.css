@@ -1,0 +1,51 @@
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modalBackground {
+    background-color: white;
+    width: 300px;
+    padding: 15px;
+    z-index: 101;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    /* text-align: center; */
+    gap: 1rem;
+}
+
+.modalContents {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.buttonsRow {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.modalButtons {
+    padding: 0.5rem;
+    border-radius: 5px;
+    background: none;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.rowName {
+    margin-right: 10px;
+}

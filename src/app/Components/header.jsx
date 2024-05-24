@@ -2,10 +2,8 @@
 // import { useEffect, useState, useRef } from 'react';
 import styles from '../styles/header.module.css';
 import { usePathname } from 'next/navigation';
-import headerImage from '../assets/header_ava.png';
+import headerImage from '/public/header_ava.png';
 import Image from 'next/image';
-import title from '../assets/title.png';
-import title2 from '../assets/title2.png';
 import Link from 'next/link';
 
 // Header bar for all pages except login

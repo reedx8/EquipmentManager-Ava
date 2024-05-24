@@ -1,15 +1,14 @@
-'use client';
-import { useEffect, useState } from 'react';
-import React from 'react';
+// 'use client';
+'use server';
 import styles from '../styles/upcomingmaint.module.css';
 import { AiOutlineMail, AiOutlinePhone } from 'react-icons/ai';
 import { BsTelephone } from 'react-icons/bs';
-import supabase from '../config/supabaseClient';
+// import supabase from '../config/supabaseClient';
 import Image from 'next/image';
-import calIcon from '../assets/cal_icon.png';
-import calBg from '../assets/cal-bg.png';
+import calIcon from '/public/icons/cal_icon.png';
 
-export default function UpcomingMaint() {
+// Needs async function for some random reason
+export default async function UpcomingMaint() {
     return (
         <div>
             <h1 className={styles.heading}>Upcoming Maintenance</h1>

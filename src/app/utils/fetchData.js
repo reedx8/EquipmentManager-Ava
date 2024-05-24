@@ -59,3 +59,17 @@ export async function fetchProviders() {
         throw error;
     }
 }
+
+export async function fetchEventTypes() {
+    try {
+        const response = await fetch('/api/eventType');
+        if (!response.ok) {
+            throw new Error('Failed to fetch event types');
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Failed to fetch event types', error);
+        throw error;
+    }
+}

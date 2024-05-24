@@ -28,7 +28,7 @@
     margin-right: 0.5rem;
     position: relative; /* This is needed for the circle to be positioned correctly relative to its card */
     /* background-image: url('../assets/Venice.jpg'); */
-    background-image: url('../assets/Firewatch.jpg');
+    background-image: url('/Firewatch.jpg');
     background-position: center;
     border-radius: 5px;
 }

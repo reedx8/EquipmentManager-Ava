@@ -1,14 +1,10 @@
 'use client';
 import styles from '../styles/hometopcards.module.css';
-import { GoTools } from 'react-icons/go';
-import { LuCalendarClock } from 'react-icons/lu';
-import { GrInProgress } from 'react-icons/gr';
-import { MdOutlineNumbers } from 'react-icons/md';
 import Image from 'next/image';
-import wrench from '../assets/wrench.png';
-import hashtag from '../assets/hashtag.png';
-import time from '../assets/time.png';
-import cal from '../assets/cal.png';
+import wrench from '/public/icons/wrench.png';
+import hashtag from '/public/icons/hashtag.png';
+import time from '/public/icons/time.png';
+import cal from '/public/icons/cal.png';
 import { motion } from 'framer-motion';
 
 export default function HomeTopCards() {
@@ -17,7 +13,7 @@ export default function HomeTopCards() {
             <motion.div
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 1 }}
+                transition={{ duration: 0.5 }}
                 className={styles.card}
             >
                 {/* <div className={styles.card}> */}
@@ -31,7 +27,7 @@ export default function HomeTopCards() {
             <motion.div
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 1 }}
+                transition={{ duration: 0.5 }}
                 className={styles.cardWithPercent}
             >
                 {/* <div className={styles.cardWithPercent}> */}
@@ -54,7 +50,7 @@ export default function HomeTopCards() {
             <motion.div
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 1 }}
+                transition={{ duration: 0.5 }}
                 className={styles.cardWithPercent}
             >
                 {/* <div className={styles.cardWithPercent}> */}
@@ -72,7 +68,7 @@ export default function HomeTopCards() {
             <motion.div
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 1 }}
+                transition={{ duration: 0.5 }}
                 className={styles.card}
             >
                 {/* <div className={styles.card}> */}

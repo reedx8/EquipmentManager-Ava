@@ -1,5 +1,3 @@
-// 'use client';
-// import Image from 'next/image';
 import styles from './page.module.css';
 // import AuthForm from './auth/auth-form';
 import HomeTopCards from './Components/hometopcards';

@@ -176,11 +176,10 @@ export default function Providers() {
                             onChange={handleSearch}
                         />
                     </div>
-                    <div className={styles.viewOptions}>
-                        {/* <CiViewTable /> */}
+                    {/* <div className={styles.viewOptions}>
                         <IoGrid />
                         <FiMenu />
-                    </div>
+                    </div> */}
                 </section>
                 <section className={styles.cardSection}>
                     {filteredProviders.length === 0 &&
