@@ -1,0 +1,15 @@
+services:
+    nextjs:
+        build: .
+        image: equip
+        command: npm run dev
+        volumes:
+            - .:/app
+            - /app/node_modules
+        ports:
+            - '3000:3000'
+        environment:
+            - NODE_ENV=development
+        env_file:
+            - .env.local
+        working_dir: /app
