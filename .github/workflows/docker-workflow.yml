@@ -1,4 +1,4 @@
-name: Build and Push Docker Image upon Main Branch Update
+name: Build and Push Docker Image Upon Main Branch Update
 
 on:
     push:
@@ -28,3 +28,7 @@ jobs:
                   context: .
                   push: true
                   tags: xvreed/equip:latest
+                  platforms: linux/amd64, linux/arm64
+
+            - name: Verify Images
+              run: docker buildx imagetools inspect xvreed/equip:latest
