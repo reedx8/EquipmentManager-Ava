@@ -16,11 +16,14 @@ Equipment Manager web app for Ava Roasteria. A React/Next.js/JS/CSS/Supabase pro
 
 ## Tooling / Resources:
 
-The following are the tools and resources already installed and in-use in the project. Ensure to use to keep consistency across contributions, as well as keeping project size small:
+The following are the tools and resources already installed and in-use in the project (see package.json). Ensure to use to keep consistency across contributions, as well as keeping project size small:
 
 1. Routing: Next.js App Router (https://nextjs.org/docs/app/building-your-application/routing#the-app-router)
 2. Icons: react-icons (https://react-icons.github.io/react-icons/)
 3. Tables: react-table-library (https://react-tables.com)
+4. Calendar: react-big-calendar
+5. Icons: react-icons
+6. Loading spinners and skeletons: react-loading-skeleton and react-spinners
 
 ## Styling:
 
