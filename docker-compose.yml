@@ -1,7 +1,8 @@
 services:
     nextjs:
         build: .
-        image: equip
+        image: xvreed/equip:latest
+        container_name: equipmentmanager-ava
         command: npm run dev
         volumes:
             - .:/app
