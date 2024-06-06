@@ -18,22 +18,24 @@ import { usePagination } from '@table-library/react-table-library/pagination';
 import { MdDelete, MdEdit, MdAddCircle } from 'react-icons/md';
 import { IoIosSwap, IoIosAddCircleOutline } from 'react-icons/io';
 import supabase from '../config/supabaseClient';
+import { BsBoxes } from 'react-icons/bs';
 import CustomSpinner from '../Components/customspinner';
+import TopCards from '@/app/Components/equipment/topcards';
 const AddEquipmentModal = dynamic(
-    () => import('../Components/addequipmentmodal'),
+    () => import('../Components/equipment/addequipmentmodal'),
     {
         loading: () => <CustomSpinner />,
     }
 );
-const SwapModal = dynamic(() => import('../Components/swapmodal'), {
+const SwapModal = dynamic(() => import('../Components/equipment/swapmodal'), {
     loading: () => <CustomSpinner />,
 });
 const EditEquipmentModal = dynamic(
-    () => import('../Components/editequipmentmodal'),
+    () => import('../Components/equipment/editequipmentmodal'),
     { loading: () => <CustomSpinner /> }
 );
 const DeleteEquipmentModal = dynamic(
-    () => import('../Components/deleteequipmentmodal'),
+    () => import('../Components/equipment/deleteequipmentmodal'),
     { loading: () => <CustomSpinner /> }
 );
 import Sidebar from '../Components/sidebar';
@@ -48,6 +50,7 @@ export default function Equipment() {
     const [filtered, setFiltered] = useState(null); // tables data after search and location input
     const [location, setLocation] = useState(''); // store name, ie location, from drop down menu
     const [search, setSearch] = useState(''); // search field input
+    // const [showStorage, setShowStorage] = useState(false); // show whats in storage
     const [showAddEquipmentModal, setShowAddEquipmentModal] = useState(false);
     const [showSwapModal, setShowSwapModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
@@ -60,15 +63,15 @@ export default function Equipment() {
     const pagination = usePagination(data, {
         state: {
             page: 0,
-            size: 5,
+            size: 12,
         },
-        onChange: onPaginationChange,
+        // onChange: onPaginationChange,
     });
 
     // Delete when done with testing:
-    function onPaginationChange(action, state) {
-        console.log(action, state);
-    }
+    // function onPaginationChange(action, state) {
+    //     console.log(action, state);
+    // }
 
     function handleSearch(event) {
         setSearch(event.target.value);
@@ -82,6 +85,7 @@ export default function Equipment() {
     function handleReset() {
         setLocation('');
         setSearch('');
+        // setShowStorage(false);
         // console.log(location);
     }
 
@@ -184,6 +188,16 @@ export default function Equipment() {
             console.log(error);
         }
         if (data) {
+            // sort data by store name
+            data.sort((a, b) => {
+                if (a.Store_Name < b.Store_Name) {
+                    return -1;
+                }
+                if (a.Store_Name > b.Store_Name) {
+                    return 1;
+                }
+                return 0;
+            });
             setData({ nodes: data }); // data needs to be in a nodes prop for react-table-library
             setFiltered({ nodes: data });
             // console.log(data.nodes);
@@ -192,7 +206,7 @@ export default function Equipment() {
         // setLoading(false);
     }
 
-    // fetch all equipment from backend on first mount only
+    // fetch all equipment/stores from backend on first mount only
     useEffect(() => {
         fetchAllEquipment();
         const fetchAllStores = async () => {
@@ -216,9 +230,15 @@ export default function Equipment() {
             filteredData = filteredData.filter((item) =>
                 item.Store_Name.toLowerCase().includes(location.toLowerCase())
             );
+            // if (showStorage) {
+            //     filteredData = filteredData.filter(
+            //         (item) => item.Status_id === 2
+            //     );
+            // }
             setFiltered({ nodes: filteredData });
         }
-    }, [search, location]);
+        // console.log('useEffect called');
+    }, [data, search, location]);
 
     return (
         <>
@@ -226,64 +246,38 @@ export default function Equipment() {
             <HeaderBar />
             <div className={styles.pageContent}>
                 <section className={styles.topInfo}>
-                    <div className={styles.infoTextCard}>
-                        <p>31 Ava Roasteria</p>
-                        <p>12 Revel</p>
-                        <p>4 DoorDash</p>
-                        <p>4 Grubhub</p>
-                        <p>4 Uber Eats</p>
-                    </div>
-                    <div className={styles.infoTextCard}>
-                        <p>20 Hall</p>
-                        <p>15 Barrows</p>
-                        <p>17 Kruse</p>
-                        <p>12 Orenco</p>
-                        <p>10 Bakery</p>
-                        <p>6 Office</p>
-                    </div>
-                    <div className={styles.card}>
-                        <div className={styles.cardTitle}>
-                            <h3>Most Repairs</h3>
-                        </div>
-                        <div className={styles.cardInfo}>
-                            <p className={styles.cardNumber}>4</p>
-                            <p className={styles.cardItem}>
-                                Espresso Machine (Hall)
-                            </p>
-                        </div>
-                    </div>
-                    <div className={styles.card}>
-                        <div className={styles.cardTitle}>
-                            <h3>Highest Cost</h3>
-                        </div>
-                        <div className={styles.cardInfo}>
-                            <p className={styles.cardNumber}>$282</p>
-                            <p className={styles.cardItem}>
-                                Refrigerator (Barrows)
-                            </p>
-                        </div>
-                    </div>
+                    {data && <TopCards data={data.nodes} />}
                 </section>
                 <section>
                     <div className={styles.headerRow}>
                         <div>
-                            <h1 className={styles.title}>All Equipment</h1>
+                            {/* <h1 className={styles.title}>All Equipment</h1> */}
                         </div>
                         <div className={styles.btnSection}>
-                            <button
+                            {/* <button
                                 className={styles.swapBtn}
                                 type='button'
                                 onClick={() => openModal('swap')}
-                                // onClick={handleSwapEquipment}
                             >
                                 <IoIosSwap size={20} />
                                 Swap
-                            </button>
+                            </button> */}
+                            {/* <button
+                                className={
+                                    showStorage
+                                        ? styles.storageActiveBtn
+                                        : styles.storageBtn
+                                }
+                                type='button'
+                                onClick={() => setShowStorage(!showStorage)}
+                            >
+                                <BsBoxes size={20} />
+                                Storage
+                            </button> */}
                             <button
                                 className={styles.addEquipBtn}
                                 type='button'
                                 onClick={() => openModal('add')}
-                                // onClick={handleAddEquipment}
                             >
                                 <IoMdAdd size={20} />
                                 Add

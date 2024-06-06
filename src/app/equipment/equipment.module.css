@@ -6,7 +6,7 @@ Do not alter or delete:
 }
 
 .pageContent > section {
-    margin: 2rem;
+    margin: 1rem 2rem;
 }
 
 /*
@@ -19,37 +19,44 @@ Enter in your css below:
     /* gap: 1rem; */
 }
 
-.infoTextCard {
-    font-size: 0.8rem;
-}
-
 .cardNumber {
-    font-size: 1.7rem;
+    font-size: 4rem;
 }
-.cardItem {
-    font-size: 0.8rem;
+.cardLabel {
+    font-size: 1rem;
+    color: var(--orange);
 }
 
 .card {
+    display: flex;
     background-color: white;
     padding: 15px;
-    /* border-radius: 5px; */
-    /* margin: 5px; */
-    /* flex-grow: 0.5; */
     border: 1px solid #e0e0e0;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    gap: 1.7rem;
 }
 
-.cardTitle {
-    text-align: center;
+.totalCount {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.cardInfo {
+.middlePane,
+.rightPane {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    /* gap: 0.8rem; */
+    width: 80px;
+}
+
+.cardRow {
     display: flex;
     justify-content: space-between;
-    gap: 0.8rem;
-    align-items: center;
+    /* margin-bottom: 0.5rem; */
 }
 
 .headerRow {
@@ -106,7 +113,9 @@ Enter in your css below:
     /* flex-direction: row; */
 }
 .swapBtn,
-.addEquipBtn {
+.addEquipBtn,
+.storageBtn,
+.storageActiveBtn {
     padding: 0.4rem;
     cursor: pointer;
     border-radius: 0.5rem;
@@ -119,17 +128,24 @@ Enter in your css below:
     font-weight: 500;
 }
 
-.swapBtn {
+.swapBtn,
+.storageBtn {
     background-color: transparent;
     border: 1px solid var(--ltdark);
     color: bar(--ltdark);
 }
-.swapBtn:hover {
+.swapBtn:hover,
+.storageBtn:hover {
     background-color: var(--ltdark);
     color: white;
-    /* add shadow to button on hover */
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.7);
     transition: all 0.4s;
+}
+
+.storageActiveBtn {
+    background-color: var(--ltdark);
+    color: white;
+    border: none;
 }
 
 .addEquipBtn {

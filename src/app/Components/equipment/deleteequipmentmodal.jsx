@@ -1,8 +1,10 @@
 'use client';
 // import React from 'react';
 import { useState, useEffect } from 'react';
-import styles from '../equipment/equipment.module.css';
-import supabase from '../config/supabaseClient';
+import styles from '@/app/equipment/equipment.module.css';
+// import styles from '../equipment/equipment.module.css';
+import supabase from '@/app/config/supabaseClient';
+// import supabase from '../config/supabaseClient';
 
 export default function DeleteEquipmentModal({
     closeModal,

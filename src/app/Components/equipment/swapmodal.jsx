@@ -1,7 +1,8 @@
 // Client side modal
 'use client';
 import React from 'react';
-import styles from '../equipment/equipment.module.css';
+import styles from '@/app/equipment/equipment.module.css';
+// import styles from '../equipment/equipment.module.css';
 
 // Swaps equipment between store locations and storage units
 export default function SwapModal(props) {

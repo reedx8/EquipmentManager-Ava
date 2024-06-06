@@ -1,14 +1,52 @@
-// 'use client';
-'use server';
+'use client';
+// 'use server';
+import { useEffect, useState } from 'react';
 import styles from '../styles/upcomingmaint.module.css';
 import { AiOutlineMail, AiOutlinePhone } from 'react-icons/ai';
 import { BsTelephone } from 'react-icons/bs';
 // import supabase from '../config/supabaseClient';
 import Image from 'next/image';
 import calIcon from '/public/icons/cal_icon.png';
+import supabase from '../config/supabaseClient';
 
 // Needs async function for some random reason
-export default async function UpcomingMaint() {
+export default function UpcomingMaint() {
+    const [upcomingMaint, setUpcomingMaint] = useState({
+        day: '--',
+        month: '--',
+    });
+
+    useEffect(() => {
+        const getUpcomingMaint = async () => {
+            let today = new Date().toISOString().slice(0, 10); // format as "YYYY-MM-DD"
+
+            let { error, data } = await supabase
+                .from('Events')
+                .select('date')
+                .gte('date', today)
+                .eq('type_id', 2)
+                .order('date', { ascending: true });
+
+            if (error) {
+                console.log('error', error);
+            }
+            if (data) {
+                if (data.length === 0) {
+                    return; // no upcoming maintenance
+                }
+
+                const date = new Date(data[0].date);
+                const dayDate = date.getDate();
+                const monthName = date.toLocaleString('default', {
+                    month: 'long',
+                });
+                // console.log('monthName: ', monthName);
+                // console.log('dayDate: ', dayDate);
+                setUpcomingMaint({ day: dayDate, month: monthName });
+            }
+        };
+        getUpcomingMaint();
+    }, []);
     return (
         <div>
             <h1 className={styles.heading}>Upcoming Maintenance</h1>
@@ -16,9 +54,10 @@ export default async function UpcomingMaint() {
                 {/* <Image src={calBg} className={styles.calBg} /> */}
                 <div className={styles.dateCardSide}>
                     <p className={styles.day}>
-                        5<sup className={styles.daySupertext}>th</sup>
+                        {upcomingMaint.day}
+                        <sup className={styles.daySupertext}>th</sup>
                     </p>
-                    <p className={styles.month}>July</p>
+                    <p className={styles.month}>{upcomingMaint.month}</p>
                     <div className={styles.circle}>
                         <Image
                             src={calIcon}

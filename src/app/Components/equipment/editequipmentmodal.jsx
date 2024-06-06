@@ -2,8 +2,10 @@
 'use client';
 import React from 'react';
 import { useState, useEffect } from 'react';
-import styles from '../equipment/equipment.module.css';
-import supabase from '../config/supabaseClient';
+import styles from '@/app/equipment/equipment.module.css';
+// import styles from '../equipment/equipment.module.css';
+import supabase from '@/app/config/supabaseClient';
+// import supabase from '../config/supabaseClient';
 
 export default function EditEquipmentModal({
     closeModal,
@@ -100,18 +102,16 @@ export default function EditEquipmentModal({
                             value={equipmentType || ''}
                             onChange={(e) => setEquipmentType(e.target.value)}
                         >
-                            <option value='Tablet'>Tablet</option>
+                            <option value='Appliance'>Appliance</option>
                             <option value='Computer'>Computer</option>
-                            <option value='Printer'>Printer</option>
+                            <option value='Grinder'>Grinder</option>
+                            <option value='Misc.'>Misc.</option>
                             <option value='Network Device'>
                                 Network Device
                             </option>
-                            <option value='Oven'>Oven</option>
+                            <option value='Printer'>Printer</option>
                             <option value='Refrigerator'>Refrigerator</option>
-                            <option value='Espresso Machine'>
-                                Espresso Machine
-                            </option>
-                            <option value='Microwave'>Microwave</option>
+                            <option value='Tablet'>Tablet</option>
                         </select>
                     </div>
                     <div>
@@ -129,10 +129,11 @@ export default function EditEquipmentModal({
                         >
                             <option value='Hall'>Hall</option>
                             <option value='Barrows'>Barrows</option>
-                            <option value='Orenco'>Orenco</option>
                             <option value='Kruse'>Kruse</option>
+                            <option value='Orenco'>Orenco</option>
                             <option value='Bakery'>Bakery</option>
                             <option value='Office'>Office</option>
+                            <option value='Warehouse'>Warehouse</option>
                         </select>
                     </div>
                     <div>
@@ -164,7 +165,6 @@ export default function EditEquipmentModal({
                             onChange={(e) => setStatus(e.target.value)}
                         >
                             <option value={1}>On Floor</option>
-                            <option value={2}>In Storage</option>
                             <option value={3}>Under Maintenance</option>
                             <option value={4}>Being Repaired</option>
                             <option value={5}>Decommissioned</option>
@@ -173,6 +173,7 @@ export default function EditEquipmentModal({
                             <option value={8}>Stolen</option>
                             <option value={9}>Needs Repair</option>
                             <option value={10}>Awaiting Reassignment</option>
+                            <option value={14}>Repair Scheduled</option>
                         </select>
                     </div>
                     <div>
