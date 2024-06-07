@@ -1,9 +1,13 @@
 import styles from './page.module.css';
 // import AuthForm from './auth/auth-form';
-import HomeTopCards from './Components/hometopcards';
-import NeedsRepair from './Components/needsrepair';
-import UpcomingMaint from './Components/upcomingmaint';
-import Todo from './Components/todo';
+import HomeTopCards from '@/app/Components/home/hometopcards';
+// import HomeTopCards from './Components/hometopcards';
+import NeedsRepair from '@/app/Components/home/needsrepair';
+// import NeedsRepair from './Components/needsrepair';
+import UpcomingMaint from '@/app/Components/home/upcomingmaint';
+// import UpcomingMaint from './Components/upcomingmaint';
+import Todo from '@/app/Components/home/todo';
+// import Todo from './Components/todo';
 import Sidebar from './Components/sidebar';
 import HeaderBar from './Components/header';
 

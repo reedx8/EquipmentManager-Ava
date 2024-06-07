@@ -1,7 +1,8 @@
 'use client';
 import { useEffect, useState } from 'react';
 import React from 'react';
-import styles from '../styles/needsrepair.module.css';
+import styles from '@/app/styles/home/needsrepair.module.css';
+// import styles from '../styles/needsrepair.module.css';
 import { CompactTable } from '@table-library/react-table-library/compact';
 import {
     Table,
@@ -16,7 +17,7 @@ import { useTheme } from '@table-library/react-table-library/theme';
 import { getTheme } from '@table-library/react-table-library/baseline';
 import { usePagination } from '@table-library/react-table-library/pagination';
 // import supabase from '../config/supabaseClient';
-import globalTableTheme from '../config/theme';
+import globalTableTheme from '@/app/config/theme';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 

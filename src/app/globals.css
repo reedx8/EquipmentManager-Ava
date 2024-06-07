@@ -8,7 +8,7 @@
     /* color palette */
     --dark: #222831;
     --ltdark: #393e46;
-    --orange: #f96d00;
+    --orange: #f96d00; /* rgba: 249, 109, 0 */
     --altWhite: #f2f2f2;
     --grey: #f0f0f0;
     --blueBtn: #2196f3;
@@ -34,6 +34,12 @@ button,
 input,
 textarea {
     font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+    /* background: none; */
+    /* border: none; */
 }
 
 a {

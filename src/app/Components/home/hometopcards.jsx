@@ -1,14 +1,13 @@
 'use client';
 import { useEffect, useState } from 'react';
-import styles from '../styles/hometopcards.module.css';
+import styles from '@/app/styles/home/hometopcards.module.css';
 import Image from 'next/image';
 import wrench from '/public/icons/wrench.png';
 import hashtag from '/public/icons/hashtag.png';
 import time from '/public/icons/time.png';
 import cal from '/public/icons/cal.png';
 import { motion } from 'framer-motion';
-import supabase from '../config/supabaseClient';
-import { set } from 'date-fns';
+import supabase from '@/app/config/supabaseClient';
 
 export default function HomeTopCards() {
     const [equipmentCount, setEquipmentCount] = useState(0);
