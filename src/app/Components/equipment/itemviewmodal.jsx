@@ -7,6 +7,7 @@ import { MdOutlinePhone } from 'react-icons/md';
 import getStatus from '@/app/utils/getStatuses';
 import supabase from '@/app/config/supabaseClient';
 import { IoMdPerson } from 'react-icons/io';
+import placeholder from '/public/placeholder.jpg';
 
 /**
  * Renders a modal that displays the details of an item
@@ -79,7 +80,7 @@ export default function ItemViewModal({ itemDetails, closeModal }) {
                 <div className={styles.modalContents}>
                     <div>
                         <Image
-                            src={item.image ? item.image : '/placeholder.jpg'}
+                            src={item.image ? item.image : placeholder}
                             alt='equipment'
                             width={'300'}
                             height={'300'}
