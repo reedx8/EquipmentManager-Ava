@@ -171,14 +171,23 @@ Enter in your css below:
 .editBtn {
     color: lightgray;
 }
-
 .deleteBtn {
     color: lightcoral;
 }
+.viewBtn {
+    color: var(--blueBtn);
+}
+.editBtn,
+.deleteBtn,
+.viewBtn {
+    font-size: 1.2rem;
+}
 
 .editBtn:hover,
-.deleteBtn:hover {
+.deleteBtn:hover,
+.viewBtn:hover {
     color: black;
+    cursor: pointer;
 }
 
 /* Modal */

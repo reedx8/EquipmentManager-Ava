@@ -1,12 +1,24 @@
-// Client side modal
 'use client';
 import React from 'react';
 import { useState, useEffect } from 'react';
 import styles from '@/app/equipment/equipment.module.css';
-// import styles from '../equipment/equipment.module.css';
 import supabase from '@/app/config/supabaseClient';
-// import supabase from '../config/supabaseClient';
+import {
+    fetchProviders,
+    fetchStatuses,
+    fetchEquipTypes,
+    fetchStores,
+} from '@/app/utils/fetchData';
+import { set } from 'date-fns';
 
+/**
+ * Component to edit equipment details
+ * @param {Object} props - Object containing the following properties:
+ * @param {Function} props.closeModal - Callback function to close the modal
+ * @param {Object} props.itemDetails - Object containing the details of the equipment item
+ * @param {Function} props.refreshEquipment - Callback function to refresh the equipment list once done
+ * @returns {JSX.Element} - JSX Element containing the modal to edit equipment details
+ */
 export default function EditEquipmentModal({
     closeModal,
     itemDetails,
@@ -18,10 +30,14 @@ export default function EditEquipmentModal({
     const [storeLocation, setStoreLocation] = useState(itemDetails.Store_Name);
     const [provider, setProvider] = useState(itemDetails.Provider_Name);
     const [comments, setComments] = useState(itemDetails.Comments);
-    const [purchaseDate, setPurchaseDate] = useState(itemDetails.Purchase_Date);
+    // const [purchaseDate, setPurchaseDate] = useState(itemDetails.Purchase_Date);
     // const [reason, setReason] = useState(itemDetails.Reason);
-    const [totalCost, setTotalCost] = useState(itemDetails.Total_Cost);
+    // const [totalCost, setTotalCost] = useState(itemDetails.Total_Cost);
     const [status, setStatus] = useState(itemDetails.Status_id);
+    const [providerList, setProviderList] = useState([]);
+    const [statusList, setStatusList] = useState([]);
+    const [equipTypeList, setEquipTypeList] = useState([]);
+    const [storeList, setStoreList] = useState([]);
 
     // console.log('itemDetails: ' + equipmentName);
 
@@ -32,9 +48,26 @@ export default function EditEquipmentModal({
         setStoreLocation(itemDetails.Store_Name);
         setProvider(itemDetails.Provider_Name);
         setComments(itemDetails.Comments);
-        setPurchaseDate(itemDetails.Purchase_Date);
-        setTotalCost(itemDetails.Total_Cost);
+        // setPurchaseDate(itemDetails.Purchase_Date);
+        // setTotalCost(itemDetails.Total_Cost);
         setStatus(itemDetails.Status_id);
+
+        async function fetchAllLists() {
+            try {
+                const providers = await fetchProviders();
+                setProviderList(providers);
+                const statuses = await fetchStatuses();
+                setStatusList(statuses);
+                const equipTypes = await fetchEquipTypes();
+                setEquipTypeList(equipTypes);
+                const stores = await fetchStores();
+                setStoreList(stores);
+            } catch (error) {
+                console.error('Error fetching: ' + error);
+            }
+        }
+
+        fetchAllLists();
     }, [itemDetails]);
 
     async function handleSubmit(event) {
@@ -48,9 +81,9 @@ export default function EditEquipmentModal({
                 Store_Name: storeLocation,
                 Provider_Name: provider,
                 Comments: comments,
-                Purchase_Date: purchaseDate,
+                // Purchase_Date: purchaseDate,
                 // Reason: reason,
-                Total_Cost: totalCost,
+                // Total_Cost: totalCost,
                 Status_id: status,
             })
             .match({ id: equipmentId });
@@ -102,7 +135,12 @@ export default function EditEquipmentModal({
                             value={equipmentType || ''}
                             onChange={(e) => setEquipmentType(e.target.value)}
                         >
-                            <option value='Appliance'>Appliance</option>
+                            {equipTypeList.map((equipType, index) => (
+                                <option key={index} value={equipType.Name}>
+                                    {equipType.Name}
+                                </option>
+                            ))}
+                            {/* <option value='Appliance'>Appliance</option>
                             <option value='Computer'>Computer</option>
                             <option value='Grinder'>Grinder</option>
                             <option value='Misc.'>Misc.</option>
@@ -111,7 +149,7 @@ export default function EditEquipmentModal({
                             </option>
                             <option value='Printer'>Printer</option>
                             <option value='Refrigerator'>Refrigerator</option>
-                            <option value='Tablet'>Tablet</option>
+                            <option value='Tablet'>Tablet</option> */}
                         </select>
                     </div>
                     <div>
@@ -127,13 +165,18 @@ export default function EditEquipmentModal({
                             value={storeLocation || ''}
                             onChange={(e) => setStoreLocation(e.target.value)}
                         >
-                            <option value='Hall'>Hall</option>
+                            {storeList.map((store, index) => (
+                                <option key={index} value={store.Name}>
+                                    {store.Name}
+                                </option>
+                            ))}
+                            {/* <option value='Hall'>Hall</option>
                             <option value='Barrows'>Barrows</option>
                             <option value='Kruse'>Kruse</option>
                             <option value='Orenco'>Orenco</option>
                             <option value='Bakery'>Bakery</option>
                             <option value='Office'>Office</option>
-                            <option value='Warehouse'>Warehouse</option>
+                            <option value='Warehouse'>Warehouse</option> */}
                         </select>
                     </div>
                     <div>
@@ -146,12 +189,17 @@ export default function EditEquipmentModal({
                             value={provider || ''}
                             onChange={(e) => setProvider(e.target.value)}
                         >
-                            <option value='Ava Roasteria'>Ava Roasteria</option>
+                            {providerList.map((provider, index) => (
+                                <option key={index} value={provider.name}>
+                                    {provider.name}
+                                </option>
+                            ))}
+                            {/* <option value='Ava Roasteria'>Ava Roasteria</option>
                             <option value='Grubhub'>Grubhub</option>
                             <option value='Doordash'>DoorDash</option>
                             <option value='Uber Eats'>Uber Eats</option>
                             <option value='Comcast'>Comcast</option>
-                            <option value='Revel'>Revel</option>
+                            <option value='Revel'>Revel</option> */}
                         </select>
                     </div>
                     <div>
@@ -164,7 +212,12 @@ export default function EditEquipmentModal({
                             value={status}
                             onChange={(e) => setStatus(e.target.value)}
                         >
-                            <option value={1}>On Floor</option>
+                            {statusList.map((status, index) => (
+                                <option key={index} value={status.id}>
+                                    {status.Status}
+                                </option>
+                            ))}
+                            {/* <option value={1}>On Floor</option>
                             <option value={3}>Under Maintenance</option>
                             <option value={4}>Being Repaired</option>
                             <option value={5}>Decommissioned</option>
@@ -173,10 +226,10 @@ export default function EditEquipmentModal({
                             <option value={8}>Stolen</option>
                             <option value={9}>Needs Repair</option>
                             <option value={10}>Awaiting Reassignment</option>
-                            <option value={14}>Repair Scheduled</option>
+                            <option value={14}>Repair Scheduled</option> */}
                         </select>
                     </div>
-                    <div>
+                    {/* <div>
                         <label
                             htmlFor='purchaseDate'
                             className={styles.rowName}
@@ -190,8 +243,8 @@ export default function EditEquipmentModal({
                             value={purchaseDate || ''}
                             onChange={(e) => setPurchaseDate(e.target.value)}
                         />
-                    </div>
-                    <div>
+                    </div> */}
+                    {/* <div>
                         <label htmlFor='totalCost' className={styles.rowName}>
                             Total Cost: $
                         </label>
@@ -202,7 +255,7 @@ export default function EditEquipmentModal({
                             value={totalCost || ''}
                             onChange={(e) => setTotalCost(e.target.value)}
                         />
-                    </div>
+                    </div> */}
                     {/* <div>
                         <label
                             htmlFor='numOfRepairs'

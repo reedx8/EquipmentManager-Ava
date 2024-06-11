@@ -12,13 +12,15 @@ import {
     HeaderCell,
     Cell,
 } from '@table-library/react-table-library/table';
-import { useTheme } from '@table-library/react-table-library/theme';
-import { getTheme } from '@table-library/react-table-library/baseline';
 import { usePagination } from '@table-library/react-table-library/pagination';
-import { MdDelete, MdEdit, MdAddCircle } from 'react-icons/md';
-import { IoIosSwap, IoIosAddCircleOutline } from 'react-icons/io';
+import { useTheme } from '@table-library/react-table-library/theme';
+import {
+    MdDelete,
+    MdEdit,
+    MdOutlineMenuOpen,
+    MdAddCircle,
+} from 'react-icons/md';
 import supabase from '../config/supabaseClient';
-import { BsBoxes } from 'react-icons/bs';
 import CustomSpinner from '../Components/customspinner';
 import TopCards from '@/app/Components/equipment/topcards';
 const AddEquipmentModal = dynamic(
@@ -38,12 +40,22 @@ const DeleteEquipmentModal = dynamic(
     () => import('../Components/equipment/deleteequipmentmodal'),
     { loading: () => <CustomSpinner /> }
 );
+const ItemViewModal = dynamic(
+    () => import('@/app/Components/equipment/itemviewmodal'),
+    { loading: () => <CustomSpinner /> }
+);
+// import ItemViewModal from '@/app/Components/equipment/itemviewmodal';
 import Sidebar from '../Components/sidebar';
 import HeaderBar from '../Components/header';
 import { IoMdAdd } from 'react-icons/io';
 import globalTableTheme from '../config/theme';
 import { fetchStores } from '../utils/fetchData';
+import getStatus from '@/app/utils/getStatuses';
 
+/**
+ * Renders the Equipment page
+ * @returns {JSX.Element} -- Equipment component
+ */
 export default function Equipment() {
     const [data, setData] = useState(null); // Initial data from backend
     const [fetchError, setFetchError] = useState(null); // fetch error from supabase
@@ -55,6 +67,7 @@ export default function Equipment() {
     const [showSwapModal, setShowSwapModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [showItemViewModal, setShowItemViewModal] = useState(false);
     const [currentItemDetails, setCurrentItemDetails] = useState(null);
     const [stores, setStores] = useState([]);
     // const [loading, setLoading] = useState(true);
@@ -103,6 +116,9 @@ export default function Equipment() {
             case 'delete':
                 setShowDeleteModal(true);
                 break;
+            case 'view':
+                setShowItemViewModal(true);
+                break;
             default:
                 console.log('Invalid modal type');
         }
@@ -121,15 +137,20 @@ export default function Equipment() {
             case 'delete':
                 setShowDeleteModal(false);
                 break;
+            case 'view':
+                setShowItemViewModal(false);
+                break;
             default:
                 console.log('Invalid modal type');
         }
+
+        setCurrentItemDetails(null);
     }
 
     async function handleDeleteEquipment(id) {
         // setShowDeleteModal(true);
-        console.log('delete button clicked ');
-        console.log('id: ' + id);
+        // console.log('delete button clicked ');
+        // console.log('id: ' + id);
 
         try {
             const { data, error } = await supabase
@@ -174,6 +195,27 @@ export default function Equipment() {
         setShowEditModal(true);
         console.log('hello');
         */
+    }
+
+    async function handleRowSelect(id) {
+        // console.log('Row selected: ', item);
+        // console.log('id: ', item.id);
+        try {
+            const { data, error } = await supabase
+                .from('Equipment')
+                .select('*')
+                .eq('id', id)
+                .single();
+
+            if (error) {
+                throw error;
+            }
+            // console.log('Row Item: ', data);
+            setCurrentItemDetails(data);
+            openModal('view');
+        } catch (error) {
+            console.log('Error fetching equipment details: ' + error.message);
+        }
     }
 
     async function fetchAllEquipment() {
@@ -360,7 +402,11 @@ export default function Equipment() {
                                         </Header>
                                         <Body>
                                             {allItems.map((item) => (
-                                                <Row key={item.id} item={item}>
+                                                <Row
+                                                    key={item.id}
+                                                    item={item}
+                                                    // onClick={handleRowSelect}
+                                                >
                                                     <Cell>{item.Name}</Cell>
                                                     <Cell>
                                                         {item.Store_Name}
@@ -379,6 +425,16 @@ export default function Equipment() {
                                                                 styles.editDeleteColumn
                                                             }
                                                         >
+                                                            <MdDelete
+                                                                className={
+                                                                    styles.deleteBtn
+                                                                }
+                                                                onClick={() =>
+                                                                    handleDeleteEquipment(
+                                                                        item.id
+                                                                    )
+                                                                }
+                                                            />
                                                             <MdEdit
                                                                 className={
                                                                     styles.editBtn
@@ -389,12 +445,12 @@ export default function Equipment() {
                                                                     )
                                                                 }
                                                             />
-                                                            <MdDelete
+                                                            <MdOutlineMenuOpen
                                                                 className={
-                                                                    styles.deleteBtn
+                                                                    styles.viewBtn
                                                                 }
                                                                 onClick={() =>
-                                                                    handleDeleteEquipment(
+                                                                    handleRowSelect(
                                                                         item.id
                                                                     )
                                                                 }
@@ -461,34 +517,13 @@ export default function Equipment() {
                         refreshEquipment={fetchAllEquipment}
                     />
                 )}
+                {showItemViewModal && (
+                    <ItemViewModal
+                        closeModal={closeModal}
+                        itemDetails={currentItemDetails}
+                    />
+                )}
             </div>
         </>
     );
 }
-
-const getStatus = (status) => {
-    switch (status) {
-        case 1:
-            return 'On Floor';
-        case 2:
-            return 'In Storage';
-        case 3:
-            return 'Under Maintenance';
-        case 4:
-            return 'Being Repaired';
-        case 5:
-            return 'Decommissioned';
-        case 6:
-            return 'For Sale';
-        case 7:
-            return 'Lost';
-        case 8:
-            return 'Stolen';
-        case 9:
-            return 'Needs Repair';
-        case 10:
-            return 'Awaiting Reassignment';
-        default:
-            return 'Unknown';
-    }
-};

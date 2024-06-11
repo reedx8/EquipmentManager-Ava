@@ -17,7 +17,7 @@ export default function Todo() {
                 .select('id, title, due_date, store_name')
                 .order('created_at', { ascending: false })
                 .eq('type_id', 1) // type_id 1 is for todo items
-                .limit(3);
+                .limit(4);
             if (error) {
                 setFetchError('Couldnt fetch todo items');
                 console.log('Fetch Error: ', fetchError);
@@ -36,12 +36,11 @@ export default function Todo() {
         <div>
             <h1 className={styles.heading}>Todo</h1>
             <div className={styles.todoContainer}>
-                <div className={styles.topBar}>
+                {/* <div className={styles.topBar}>
                     <button className={styles.addButton}>
                         <MdAdd />
                     </button>
-                    {/* <p>0</p> */}
-                </div>
+                </div> */}
                 <div className={styles.todoItems}>
                     {fetchError && <p>{fetchError}</p>}
                     {todoItems.map((item) => (
