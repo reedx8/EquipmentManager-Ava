@@ -16,7 +16,7 @@ Enter in your css below:
 .topInfo {
     display: flex;
     justify-content: space-between;
-    /* gap: 1rem; */
+    gap: 1rem;
 }
 
 .cardNumber {

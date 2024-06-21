@@ -3,17 +3,20 @@ import styles from '../styles/sidebar.module.css';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { FiHome, FiTool } from 'react-icons/fi';
-import { HiOutlineHome, HiOutlineCalendar } from 'react-icons/hi';
-import { RiSettings3Fill } from 'react-icons/ri';
+import { RiMoneyDollarBoxFill, RiSettings3Fill } from 'react-icons/ri';
 import Image from 'next/image';
 import { BsWrenchAdjustableCircle } from 'react-icons/bs';
 import { CiCalendarDate } from 'react-icons/ci';
 import { BiSolidDashboard } from 'react-icons/bi';
+// import { GrMoney } from 'react-icons/gr';
+import { RiMoneyDollarBoxLine } from 'react-icons/ri';
 import logo from '/public/logo.png';
 import { IoPerson } from 'react-icons/io5';
 
-// Sidebar for all pages except login
+/**
+ * Sidebar for all pages except login screen
+ * @returns {JSX.Element} Sidebar
+ */
 export default function Sidebar() {
     const [currentRoute, setCurrentRoute] = useState('/');
 
@@ -129,6 +132,22 @@ export default function Sidebar() {
                     >
                         <IoPerson className={styles.sidebarIcon} size={35} />
                         <p>Providers</p>
+                    </Link>
+                </div>
+                <div>
+                    <Link
+                        href='/expenses'
+                        className={
+                            currentRoute === '/expenses'
+                                ? styles.activeLink
+                                : styles.sidebarLink
+                        }
+                    >
+                        <RiMoneyDollarBoxLine
+                            className={styles.sidebarIcon}
+                            size={35}
+                        />
+                        <p>Expenses</p>
                     </Link>
                 </div>
             </div>

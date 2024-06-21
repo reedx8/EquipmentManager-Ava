@@ -1,0 +1,72 @@
+/*
+Do not alter or delete:
+*/
+.pageContent {
+    margin-left: 140px;
+}
+
+.pageContent > section {
+    margin: 1rem;
+}
+
+/* Customize below */
+.topCards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.tableActions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+.addInvoiceBtn {
+    background-color: var(--blueBtn);
+    /* background-color: #4caf50; */
+    color: white;
+    border: none;
+    padding: 0.4rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    width: 8rem;
+    font-weight: 500;
+}
+.addInvoiceBtn:hover {
+    /* background-color: #388e3c; */
+    background-color: #1e88e5;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.7);
+    transition: all 0.4s;
+}
+.rowActionsColumn {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 0.5rem;
+}
+.editBtn,
+.deleteBtn,
+.viewBtn {
+    font-size: 1.2rem;
+}
+
+.editBtn:hover,
+.deleteBtn:hover,
+.viewBtn:hover {
+    color: black;
+    cursor: pointer;
+}
+
+.editBtn {
+    color: lightgray;
+}
+.deleteBtn {
+    color: lightcoral;
+}
+.viewBtn {
+    color: var(--blueBtn);
+}

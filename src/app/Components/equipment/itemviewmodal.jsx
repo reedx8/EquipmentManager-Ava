@@ -8,6 +8,7 @@ import getStatus from '@/app/utils/getStatuses';
 import supabase from '@/app/config/supabaseClient';
 import { IoMdPerson } from 'react-icons/io';
 import placeholder from '/public/placeholder.jpg';
+import placeholder2 from '/public/placeholder2.jpg';
 
 /**
  * Renders a modal that displays the details of an item
@@ -80,7 +81,7 @@ export default function ItemViewModal({ itemDetails, closeModal }) {
                 <div className={styles.modalContents}>
                     <div>
                         <Image
-                            src={item.image ? item.image : placeholder}
+                            src={item.image ? item.image : placeholder2}
                             alt='equipment'
                             width={'300'}
                             height={'300'}

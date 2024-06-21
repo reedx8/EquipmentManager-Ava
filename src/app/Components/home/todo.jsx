@@ -23,7 +23,6 @@ export default function Todo() {
                 console.log('Fetch Error: ', fetchError);
                 return;
             }
-            // get month in 2 digit form and day in 2 digit form
             // let month = dueDate.getMonth() + 1;
             // let day = dueDate.getDate();
             // setTodoItems()
@@ -36,11 +35,11 @@ export default function Todo() {
         <div>
             <h1 className={styles.heading}>Todo</h1>
             <div className={styles.todoContainer}>
-                {/* <div className={styles.topBar}>
+                <div className={styles.topBar}>
                     <button className={styles.addButton}>
                         <MdAdd />
                     </button>
-                </div> */}
+                </div>
                 <div className={styles.todoItems}>
                     {fetchError && <p>{fetchError}</p>}
                     {todoItems.map((item) => (
