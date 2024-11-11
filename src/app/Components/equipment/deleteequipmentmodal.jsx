@@ -14,14 +14,19 @@ export default function DeleteEquipmentModal({
     const [equipmentId, setEquipmentId] = useState(itemDetails.id);
     const [equipmentName, setEquipmentName] = useState(itemDetails.Name);
 
+    // Deletes via setting status to 5 (decommissioned)
     async function handleDelete(event) {
         event.preventDefault();
-        console.log('Deleting...');
+
         try {
+            if (!equipmentId) {
+                throw new Error('Equipment ID is missing or invalid');
+            }
+
             const { data, error } = await supabase
                 .from('Equipment')
-                .delete()
-                .eq('id', equipmentId);
+                .update({ Status_id: 5 })
+                .match({ id: equipmentId });
 
             if (error) {
                 throw error;

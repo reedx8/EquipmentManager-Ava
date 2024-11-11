@@ -77,7 +77,7 @@ export default function TopCards({ data }) {
         }
         fetchCounts();
         */
-        console.log('TopCards: useEffect ran');
+        // console.log('TopCards: useEffect ran');
     }, [data]);
 
     return (

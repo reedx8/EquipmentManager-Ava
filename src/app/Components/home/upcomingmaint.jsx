@@ -10,7 +10,7 @@ import supabase from '@/app/config/supabaseClient';
 // Needs async function for some random reason
 export default function UpcomingMaint() {
     const [itemDetails, setItemDetails] = useState({
-        name: '--',
+        name: '',
         comments: '',
         // phone: '',
         // email: '',
@@ -24,33 +24,6 @@ export default function UpcomingMaint() {
     // });
 
     useEffect(() => {
-        // const getUpcomingMaint = async () => {
-        //     let today = new Date().toISOString().slice(0, 10); // format as "YYYY-MM-DD"
-
-        //     let { error, data } = await supabase
-        //         .from('Events')
-        //         .select('date')
-        //         .gte('date', today)
-        //         .eq('type_id', 2)
-        //         .order('date', { ascending: true });
-
-        //     if (error) {
-        //         console.log('error', error);
-        //     }
-        //     if (data) {
-        //         if (data.length === 0) {
-        //             return; // no upcoming maintenance
-        //         }
-
-        //         const date = new Date(data[0].date);
-        //         const dayDate = date.getDate();
-        //         const monthName = date.toLocaleString('default', {
-        //             month: 'long',
-        //         });
-        //         setUpcomingMaint({ day: dayDate, month: monthName });
-        //     }
-        // };
-
         const getItemDetails = async () => {
             let today = new Date().toISOString().slice(0, 10); // format as "YYYY-MM-DD"
             let { error, data } = await supabase
@@ -69,21 +42,30 @@ export default function UpcomingMaint() {
                 console.log('Error:', error);
                 return;
             }
-            // console.log('data: ', data[0]);
 
-            const date = new Date(data[0].date);
-            const dayDate = date.getDate();
-            const monthName = date.toLocaleString('default', {
-                month: 'long',
-            });
+            if (data && data.length > 0) {
+                const date = new Date(data[0].date);
+                const dayDate = date.getDate();
+                const monthName = date.toLocaleString('default', {
+                    month: 'long',
+                });
 
-            setItemDetails({
-                name: data[0].Equipment.Name,
-                comments: data[0].comments,
-                store: data[0].Equipment.Store_Name,
-                day: dayDate,
-                month: monthName,
-            });
+                setItemDetails({
+                    name: data[0].Equipment.Name,
+                    comments: data[0].comments,
+                    store: data[0].Equipment.Store_Name,
+                    day: dayDate,
+                    month: monthName,
+                });
+            } else {
+                setItemDetails({
+                    name: 'No Upcoming Events',
+                    comments: '',
+                    store: '',
+                    day: '',
+                    month: '',
+                });
+            }
         };
         getItemDetails();
         // getUpcomingMaint();

@@ -148,10 +148,6 @@ export default function Equipment() {
     }
 
     async function handleDeleteEquipment(id) {
-        // setShowDeleteModal(true);
-        // console.log('delete button clicked ');
-        // console.log('id: ' + id);
-
         try {
             const { data, error } = await supabase
                 .from('Equipment')
@@ -218,10 +214,12 @@ export default function Equipment() {
         }
     }
 
+    // Fetch all equipment except decommissioned (status_id = 5)
     async function fetchAllEquipment() {
         const { data, error } = await supabase
             .from('Equipment')
-            .select('id, Name, Store_Name, Status_id, Provider_Name');
+            .select('id, Name, Store_Name, Status_id, Provider_Name')
+            .neq('Status_id', 5); // exclude decommissioned equipment (5)
 
         if (error) {
             setData(null);
